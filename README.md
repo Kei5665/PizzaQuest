@@ -61,3 +61,6 @@ README〜ER図作成：12/24 〆切
 β版をRUNTEQ内リリース（MVP）：1月末
 
 本番リリース：2月中旬
+
+## 画面遷移図
+https://xd.adobe.com/view/54acbea9-fc27-4268-a236-562d5c0a03a9-01ff/grid
