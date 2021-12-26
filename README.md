@@ -66,4 +66,4 @@ README〜ER図作成：12/24 〆切
 https://xd.adobe.com/view/54acbea9-fc27-4268-a236-562d5c0a03a9-01ff/grid
 
 ## ER図
-https://gyazo.com/c7c1c1d54f82aee111051656cd506846
+![](https://gyazo.com/ec4446c34415d96d64401088e538d62b.png)
