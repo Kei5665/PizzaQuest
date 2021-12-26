@@ -64,3 +64,6 @@ README〜ER図作成：12/24 〆切
 
 ## 画面遷移図
 https://xd.adobe.com/view/54acbea9-fc27-4268-a236-562d5c0a03a9-01ff/grid
+
+## ER図
+https://gyazo.com/1ca66b8785a72e659c986e1be894a128
