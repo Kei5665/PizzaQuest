@@ -1,0 +1,13 @@
+<h1>レシピを作る</h1>
+<%= form_with model: recipe, url: admin_recipes_path,class:'new_recipe' do |f|%>
+<%= render 'shared/error_messages', object: f.object %>
+    <div>
+        <%= f.label :name %>
+        <%= f.text_field :name,class:'form-control' %>
+    </div>
+    <div>
+        <%= f.label :gram %>
+        <%= f.text_field :gram,class:'form-control', rows: 10  %>
+    </div>
+    <%= f.submit class:'btn btn-primary'%>
+<%end%>
