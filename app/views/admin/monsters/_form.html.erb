@@ -1,0 +1,17 @@
+      <h1>掲示板作成</h1>
+      <%= form_with model: @monster, url: new_admin_monster_path,class:'new_monster' do |f|%>
+      <%= render 'shared/error_messages', object: f.object %>
+          <div>
+              <%= f.label :name %>
+              <%= f.text_field :name,class:'form-control' %>
+          </div>
+          <div>
+              <%= f.label :level %>
+              <%= f.number_field :level,class:'form-control', rows: 10  %>
+          </div>
+          <div>
+              <%= f.label :detail %>
+              <%= f.text_area :detail,class:'form-control', rows: 10  %>
+          </div>
+          <%= f.submit class:'btn btn-primary'%>
+      <%end%>      
