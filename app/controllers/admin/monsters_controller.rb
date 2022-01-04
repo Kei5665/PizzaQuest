@@ -1,5 +1,6 @@
 class Admin::MonstersController < ApplicationController
   def index
+    @monsters = Monster.all
   end
 
   def new
