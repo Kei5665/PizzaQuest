@@ -11,8 +11,8 @@
     <p class="card-text"><%= monster.detail%></p>
     <h5>素材一覧</h5>
     <ul>
-    <% monster.recipes.each do |monster|%>
-        <li><%= monster.name%></li>
+    <% monster.recipes.each do |recipe|%>
+        <li><%= recipe.name%></li>
     <%end%>
     </ul>
     </div>
