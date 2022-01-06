@@ -1,0 +1,9 @@
+<%= form_with model: @monster_recipe, url: admin_monster_recipes_path do |f| %>
+<%= render 'shared/error_messages', object: f.object %>
+    <%= f.label :monster_id %>
+    <%= f.select :monster_id, Monster.pluck(:name, :id), class: 'form-control'  %>
+    <%= f.collection_check_boxes(:recipe_id, Recipe.all, :id, :name, include_hidden: false) do |b| %>
+      <%= b.label { b.check_box + b.text } %>
+    <% end %>
+    <%= f.submit "一括登録"%>
+<%end%> 

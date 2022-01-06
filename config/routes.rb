@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   namespace :admin do 
     resources :monsters
     resources :recipes
+    resources :monster_recipes
   end
 end
