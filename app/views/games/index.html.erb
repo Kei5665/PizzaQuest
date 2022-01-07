@@ -19,12 +19,13 @@ var resultPara = document.querySelector('.result');
 var recognizedSentences = document.querySelector('.output');
 
 var startBtn = document.querySelector('button');
+var count = 0
 
 function voiceInput() {
   startBtn.disabled = true;
   startBtn.textContent = '認識中';
 
-  var phrase = phrases[0];
+  var phrase = phrases[count];
   phrasePara.textContent = phrase;
   resultPara.textContent = '正誤判定中';
   resultPara.style.background = 'rgba(0,0,0,0.2)';
@@ -46,18 +47,26 @@ function voiceInput() {
     if(speechResult === phrase) {
       resultPara.textContent = '想定内の答えです！';
       resultPara.style.background = 'lime';
+      count++;
+
+      	if (count < phrases.length) {
+        startBtn.textContent = '次へ';
+        } else {
+            //終了
+            startBtn.textContent = '終了';
+            startBtn.addEventListener('click', battleFinish);
+        }
+
     } else {
       resultPara.textContent = '想定外の答えです';
       resultPara.style.background = 'red';
+      startBtn.textContent = 'やり直す';
     }
-
-    console.log('信頼性' + event.results[0][0].confidence);
   }
 
   recognition.onspeechend = function() {
     recognition.stop();
     startBtn.disabled = false;
-    startBtn.textContent = '次へ';
   }
 
   recognition.onerror = function(event) {
@@ -66,6 +75,10 @@ function voiceInput() {
     recognizedSentences.textContent = '入力時間オーバーなのでやり直してください';
   }
   
+}
+
+function battleFinish () {
+    window.location.href = 'http://localhost:3000/'
 }
 
 startBtn.addEventListener('click', voiceInput);
