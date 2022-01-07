@@ -1,8 +1,15 @@
+<style>
+  .disable {
+    display: none;
+  }
+</style>
+
     <h1>戦闘画面</h1>
     <p>モンスター名</p>
     <p><%= @monster.name%></p>
 
-    <button>呪文を唱える</button>
+    <button class="start">呪文を唱える</button>
+    <button class="finish disable">終了</button>
 
     <div>
         <p class="phrase">ここに認識させたい文字が表示されます</p>
@@ -18,7 +25,8 @@ var phrasePara = document.querySelector('.phrase');
 var resultPara = document.querySelector('.result');
 var recognizedSentences = document.querySelector('.output');
 
-var startBtn = document.querySelector('button');
+var startBtn = document.querySelector('.start');
+var finishBtn = document.querySelector('.finish');
 var count = 0
 
 function voiceInput() {
@@ -45,16 +53,18 @@ function voiceInput() {
     var speechResult = event.results[0][0].transcript;
     recognizedSentences.textContent = '「　' + speechResult + '　」' + 'という音声が認識されました';
     if(speechResult === phrase) {
-      resultPara.textContent = '想定内の答えです！';
+      resultPara.textContent = 'モンスターはダメージを受けた!!';
       resultPara.style.background = 'lime';
       count++;
 
       	if (count < phrases.length) {
-        startBtn.textContent = '次へ';
+        startBtn.textContent = '次のターンへ';
         } else {
             //終了
-            startBtn.textContent = '終了';
-            startBtn.addEventListener('click', battleFinish);
+            resultPara.textContent = 'モンスターはダメージを受けた!!工程が全て終了した';
+            startBtn.classList.add("disable");
+            finishBtn.classList.remove("disable");
+            finishBtn.addEventListener('click', battleFinish);
         }
 
     } else {
@@ -78,7 +88,12 @@ function voiceInput() {
 }
 
 function battleFinish () {
-    window.location.href = 'http://localhost:3000/'
+    // 効果音
+    resultPara.textContent = 'モンスターを倒した!!';
+    finishBtn.textContent = '結果画面へ';
+    finishBtn.addEventListener('click',function() {
+        window.location.href = 'http://localhost:3000/admin/monsters'
+    });
 }
 
 startBtn.addEventListener('click', voiceInput);
