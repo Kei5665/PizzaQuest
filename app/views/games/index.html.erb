@@ -1,7 +1,8 @@
-    <h1>音声認識テスト</h1>
-    <p>ボタンを押してからフレーズを言って、音声入力をテストしてください。</p>
+    <h1>戦闘画面</h1>
+    <p>モンスター名</p>
+    <p><%= @monster.name%></p>
 
-    <button>スタート</button>
+    <button>呪文を唱える</button>
 
     <div>
         <p class="phrase">ここに認識させたい文字が表示されます</p>
@@ -12,16 +13,12 @@
 <script>
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
 
-var phrases = [
-  'あいうえお'
-];
-
+var phrases = gon.names
 var phrasePara = document.querySelector('.phrase');
 var resultPara = document.querySelector('.result');
 var recognizedSentences = document.querySelector('.output');
 
 var startBtn = document.querySelector('button');
-
 
 function voiceInput() {
   startBtn.disabled = true;
