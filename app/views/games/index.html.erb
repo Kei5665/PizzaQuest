@@ -134,6 +134,15 @@ function battleFinish () {
     });
 }
 
+function gameOver () {
+    // 効果音
+    resultPara.textContent = '目の前が真っ暗になった';
+    finishBtn.textContent = '最初からやり直す';
+    finishBtn.addEventListener('click',function() {
+        window.location.href = 'http://localhost:3000/'
+    });
+}
+
 // *** ライフ変更処理 ***
 function alterLife( value ){
     // lifeの値を算出する
@@ -145,6 +154,14 @@ function alterLife( value ){
         setTimeout(function(){
             lifeMark.style.visibility = 'hidden'
         }, 300)
+        // ゲームオーバの表示
+        resultPara.textContent = '体力が0になった';
+        resultPara.style.background = 'red';
+        startBtn.classList.add("disable");
+        finishBtn.classList.remove("disable");
+        finishBtn.addEventListener('click', gameOver);
+      
+
     } else {
         // 算出の結果 100 を超過した場合
         if ( life > 100 ) {
