@@ -1,8 +1,40 @@
+<style>
+  .disable {
+    display: none;
+  }
+
+    #life-frame {
+        margin: 0 auto;
+        width: 80%;
+        background-color: rgba(10, 0, 50, 0.6);
+        display: flex;
+        padding: 3px 3px;
+    }
+
+    #life-bar {
+        height: 10px;
+        background-color: rgb(0, 255, 255);
+        transition: 300ms
+    }
+
+    #life-mark {
+        width: 10px;
+        height: 10px;
+        border-radius: 3px;
+        background-color: rgb(255, 255, 255);
+        filter: saturate(500%);
+        box-shadow: 0 0 5px 3px rgb(200, 255, 255),
+                    0 0 7px 7px rgb(100, 255, 255);
+    }
+
+</style>
+
     <h1>戦闘画面</h1>
     <p>モンスター名</p>
     <p><%= @monster.name%></p>
 
-    <button>呪文を唱える</button>
+    <button class="start">呪文を唱える</button>
+    <button class="finish disable">終了</button>
 
     <div>
         <p class="phrase">ここに認識させたい文字が表示されます</p>
@@ -10,6 +42,15 @@
         <p class="output">ここに認識された音声が表示されます</p>
     </div>
 
+    <div id="life-frame">
+        <div id="life-bar"></div>
+        <div id="life-mark"></div>
+    </div>
+
+<%= audio_tag 'correct.mp3', id: "correct" %>
+<%= audio_tag 'damege.mp3', id: "damege" %>
+<%= audio_tag 'clear.mp3', id: "clear" %>
+<%= audio_tag 'gameover.mp3', id: "gameover" %>
 <script>
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
 
@@ -18,8 +59,16 @@ var phrasePara = document.querySelector('.phrase');
 var resultPara = document.querySelector('.result');
 var recognizedSentences = document.querySelector('.output');
 
-var startBtn = document.querySelector('button');
+var startBtn = document.querySelector('.start');
+var finishBtn = document.querySelector('.finish');
 var count = 0
+
+const lifeBar = document.getElementById('life-bar')         // ライフバー
+const lifeMark = document.getElementById('life-mark')       // ライフの光部分
+const increaseBtn = document.getElementById('increase-btn') // + ボタン
+const decreaseBtn = document.getElementById('decrease-btn') // - ボタン
+let life = 100                                              // ライフ初期値
+lifeBar.style.width = "100%"                                // ライフ初期幅
 
 function voiceInput() {
   startBtn.disabled = true;
@@ -45,22 +94,27 @@ function voiceInput() {
     var speechResult = event.results[0][0].transcript;
     recognizedSentences.textContent = '「　' + speechResult + '　」' + 'という音声が認識されました';
     if(speechResult === phrase) {
-      resultPara.textContent = '想定内の答えです！';
+      resultPara.textContent = 'モンスターはダメージを受けた!!';
       resultPara.style.background = 'lime';
+      correct.play();
       count++;
 
       	if (count < phrases.length) {
-        startBtn.textContent = '次へ';
+        startBtn.textContent = '次のターンへ';
         } else {
             //終了
-            startBtn.textContent = '終了';
-            startBtn.addEventListener('click', battleFinish);
+            resultPara.textContent = 'モンスターはダメージを受けた!!工程が全て終了した';
+            startBtn.classList.add("disable");
+            finishBtn.classList.remove("disable");
+            finishBtn.addEventListener('click', battleFinish);
         }
 
     } else {
       resultPara.textContent = '想定外の答えです';
       resultPara.style.background = 'red';
       startBtn.textContent = 'やり直す';
+      damege.play();
+      alterLife( -25 )
     }
   }
 
@@ -78,7 +132,54 @@ function voiceInput() {
 }
 
 function battleFinish () {
-    window.location.href = 'http://localhost:3000/'
+    // 効果音
+    clear.play();
+    resultPara.textContent = 'モンスターを倒した!!';
+    finishBtn.textContent = '結果画面へ';
+    finishBtn.addEventListener('click',function() {
+        window.location.href = 'http://localhost:3000/admin/monsters'
+    });
+}
+
+function gameOver () {
+    // 効果音
+    gameover.play();
+    resultPara.textContent = '目の前が真っ暗になった';
+    finishBtn.textContent = '最初からやり直す';
+    finishBtn.addEventListener('click',function() {
+        window.location.href = 'http://localhost:3000/'
+    });
+}
+
+// *** ライフ変更処理 ***
+function alterLife( value ){
+    // lifeの値を算出する
+    life += value 
+    if ( life <= 0 ){
+        // 算出の結果 0 以下になった場合
+        life = 0
+        // 0.3秒後に光部分を非表示にする
+        setTimeout(function(){
+            lifeMark.style.visibility = 'hidden'
+        }, 300)
+        // ゲームオーバの表示
+        resultPara.textContent = '体力が0になった';
+        resultPara.style.background = 'red';
+        startBtn.classList.add("disable");
+        finishBtn.classList.remove("disable");
+        finishBtn.addEventListener('click', gameOver);
+      
+
+    } else {
+        // 算出の結果 100 を超過した場合
+        if ( life > 100 ) {
+            life = 100
+        }
+        // 光部分を表示する
+        lifeMark.style.visibility = 'visible'
+    }
+    // スタイル(幅)を更新する
+    lifeBar.style.width = life + "%"
 }
 
 startBtn.addEventListener('click', voiceInput);
