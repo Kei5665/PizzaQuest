@@ -8,4 +8,9 @@ class GamesController < ApplicationController
     end
     gon.names = names
   end
+
+  def result
+    @monster = Monster.find_by(id: params[:monster_id])
+    @gold = @monster.level * 100
+  end
 end
