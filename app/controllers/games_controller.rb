@@ -2,6 +2,9 @@ class GamesController < ApplicationController
   def index
     @monster = Monster.find_by(id: params[:monster_id])
 
+    user_attack_point = 100 / @monster.recipes.size
+    gon.user_attack_point = user_attack_point
+
     names = []
     @monster.recipes.each do |recipe|
       names.push(recipe.name)
