@@ -18,6 +18,9 @@
     <h1>戦闘画面</h1>
     <p>モンスター名</p>
     <p><%= @monster.name%></p>
+    <div class="container">
+      <progress class="nes-progress is-error" id="life_monster" value="100" max="100"></progress>
+    </div>
 
     <button class="start">呪文を唱える</button>
     <button class="finish disable">終了</button>
@@ -30,7 +33,7 @@
     </div>
 
     <div class="container">
-      <progress class="nes-progress is-success" value="100" max="100"></progress>
+      <progress class="nes-progress is-success" id="life_user" value="100" max="100"></progress>
     </div>
 
 <%= audio_tag 'correct.mp3', id: "correct" %>
@@ -56,7 +59,7 @@ var finishBtn = document.querySelector('.finish');
 var resultLink = document.querySelector('#result');
 var count = 0
 
-const lifeBar_user = document.querySelector('.nes-progress')         // ライフバー
+const lifeBar_user = document.getElementById('life_user')         // ライフバー
 const increaseBtn = document.getElementById('increase-btn') // + ボタン
 const decreaseBtn = document.getElementById('decrease-btn') // - ボタン
 let life = 100                                              // ライフ初期値
