@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   def index
-    @monster = Monster.find_by(id: 1)
+    @monster = Monster.find_by(id: params[:monster_id])
 
     names = []
     @monster.recipes.each do |recipe|

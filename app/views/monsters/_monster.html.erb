@@ -1,0 +1,9 @@
+<%= link_to monster_path(monster.id), class: "list-group-item-action" do %>
+<li class="list-group-item d-flex justify-content-between align-items-start">
+  <div class="ms-2 me-auto">
+    <div class="fw-bold"><%=monster.name%></div>
+    lelel:<%= monster.level%>
+  </div>
+  <span class="badge bg-primary rounded-pill">モンスター画像</span>
+</li>
+<%end%>
