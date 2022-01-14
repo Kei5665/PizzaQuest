@@ -115,6 +115,8 @@ let life = 100                                              // ライフ初期�
 let life_monster = 100                                              // ライフ初期値
 
 function voiceInput() {
+
+  resultBox.classList.remove("disable");
   startBtn.disabled = true;
   startBtn.textContent = '認識中';
 
