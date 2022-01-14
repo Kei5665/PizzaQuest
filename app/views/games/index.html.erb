@@ -28,6 +28,16 @@
     }
 
 </style>
+<!-- Rounded Modal -->
+<section>
+  <dialog class="nes-dialog is-rounded" id="dialog-rounded">
+    <form method="dialog">
+      <h5 class="title text-center">Game Start!!</h5>
+      <p class="text-center">頑張ってください!!</p>
+      <button class="nes-btn is-primary w-100">Start</button>
+    </form>
+  </dialog>
+</section>
 
     <h1>戦闘画面</h1>
     <p>モンスター名</p>
@@ -52,6 +62,12 @@
 <%= audio_tag 'damege.mp3', id: "damege" %>
 <%= audio_tag 'clear.mp3', id: "clear" %>
 <%= audio_tag 'gameover.mp3', id: "gameover" %>
+<script>
+var myModal = document.getElementById('dialog-rounded');
+document.onreadystatechange = function () {
+  myModal.showModal()
+};
+</script>
 <script>
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
 
