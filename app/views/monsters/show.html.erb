@@ -1,4 +1,20 @@
-<div class="container">
-  <h2><%=@monster.name%></h2>
-  <p>Find me in app/views/monsters/show.html.erb</p>
+<div class="container my-5">
+  <h1 class="text-center"><%=@monster.name%></h1>
+
+  <div class="monster-img d-flex justify-content-center my-5">
+    <i class="nes-mario"></i>
+  </div>
+
+  <h1 class="text-center mt-4">level:<%=@monster.level%></h1>
+
+  <div class="nes-container with-title is-centered my-5">
+    <p class="title">モンスター詳細</p>
+    <p><%=@monster.detail%></p>
+  </div>
+
+  <div class="btn-box d-flex justify-content-center">
+    <a class="nes-btn is-primary" href="#">start</a>
+    <%= link_to 'start', games_path(:monster_id => @monster.id)%>
+  </div>
+
 </div>
