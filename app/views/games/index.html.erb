@@ -50,6 +50,7 @@ document.onreadystatechange = function () {
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
 
 var phrases = gon.names
+var user_attack_point = gon.user_attack_point
 var phrasePara = document.querySelector('.phrase');
 var resultPara = document.querySelector('.result');
 var recognizedSentences = document.querySelector('.output');
@@ -60,9 +61,11 @@ var resultLink = document.querySelector('#result');
 var count = 0
 
 const lifeBar_user = document.getElementById('life_user')         // ライフバー
+const lifeBar_monster = document.getElementById('life_monster')         // ライフバー
 const increaseBtn = document.getElementById('increase-btn') // + ボタン
 const decreaseBtn = document.getElementById('decrease-btn') // - ボタン
 let life = 100                                              // ライフ初期値
+let life_monster = 100                                              // ライフ初期値
 
 function voiceInput() {
   startBtn.disabled = true;
@@ -90,6 +93,7 @@ function voiceInput() {
     if(speechResult === phrase) {
       resultPara.textContent = 'モンスターはダメージを受けた!!';
       resultPara.style.background = 'lime';
+      alterLife_monster(user_attack_point)
       correct.play();
       count++;
 
@@ -98,6 +102,7 @@ function voiceInput() {
         } else {
             //終了
             resultPara.textContent = 'モンスターはダメージを受けた!!工程が全て終了した';
+            lifeBar_monster.value = 0;
             startBtn.classList.add("disable");
             finishBtn.classList.remove("disable");
             finishBtn.addEventListener('click', battleFinish);
@@ -167,6 +172,22 @@ function alterLife( value ){
     }
     // ライフバーの値を更新する
     lifeBar_user.value = life
+}
+
+function alterLife_monster( value ){
+    // lifeの値を算出する
+    life_monster -= value 
+    if ( life_monster <= 0 ){
+        // 算出の結果 0 以下になった場合
+        life_monster = 0      
+    } else {
+        // 算出の結果 100 を超過した場合
+        if ( life_monster > 100 ) {
+            life_monster = 100
+        }
+    }
+    // ライフバーの値を更新する
+    lifeBar_monster.value = life_monster
 }
 
 startBtn.addEventListener('click', voiceInput);
