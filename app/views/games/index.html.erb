@@ -74,6 +74,8 @@
   <h2 class="encourage_to_speech">レシピを唱えろ!!</h2>
   <button class="start nes-btn is-primary">呪文を唱える</button>
   <button class="finish disable nes-btn is-success">終了</button>
+  <button class="restart disable nes-btn is-error"></button>
+  <%= link_to 'やり直す', games_path(:monster_id => @monster.id), class: "disable nes-btn is-error",id: "restart"%>
   <%= link_to '結果画面へ', games_result_path(:monster_id => @monster.id), class: "disable nes-btn is-success",id: "result"%>
 
     <div class="speech-result-box disable">
@@ -103,6 +105,7 @@ var recognizedSentences = document.querySelector('.output');
 
 var startBtn = document.querySelector('.start');
 var finishBtn = document.querySelector('.finish');
+var restartBtn = document.querySelector('#restart');
 var resultLink = document.querySelector('#result');
 var resultBox = document.querySelector('.speech-result-box');
 var encourageSpeech = document.querySelector('.encourage_to_speech');
@@ -193,10 +196,9 @@ function gameOver () {
     // 効果音
     gameover.play();
     resultPara.textContent = '目の前が真っ暗になった';
-    finishBtn.textContent = '最初からやり直す';
-    finishBtn.addEventListener('click',function() {
-        window.location.href = 'http://localhost:3000/'
-    });
+    restartBtn.textContent = '最初からやり直す';
+    finishBtn.classList.add("disable");
+    restartBtn.classList.remove("disable")
 }
 
 // *** ライフ変更処理 ***
