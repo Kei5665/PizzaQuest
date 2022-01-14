@@ -9,33 +9,79 @@
   <dialog class="nes-dialog is-rounded" id="dialog-rounded">
     <form method="dialog">
       <h5 class="title text-center">Game Start!!</h5>
-      <p class="text-center">頑張ってください!!</p>
+      <p class="text-center">モンスターが現れた!!</p>
       <button class="nes-btn is-primary w-100">Start</button>
     </form>
   </dialog>
 </section>
+    
+      <div class="nes-table-responsive">
+        <table class="nes-table is-bordered ms-auto">
+          <thead>
+            <tr>
+              <th class="d-flex justify-content-between p-3">
+                <p class="m-0">name:<%= @monster.name%></p>
+                <p class="m-0">level:<%= @monster.level%></p>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="d-flex justify-content-between">
+                <div>
+                  <p class="m-0">HP:</p>
+                </div>
+                <div class="container">
+                  <progress class="nes-progress is-error" id="life_monster" value="100" max="100"></progress>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="monster-img-box text-center">
+        <i class="nes-mario my-4 mx-auto"></i>
+      </div>
 
-    <h1>戦闘画面</h1>
-    <p>モンスター名</p>
-    <p><%= @monster.name%></p>
-    <div class="container">
-      <progress class="nes-progress is-error" id="life_monster" value="100" max="100"></progress>
+    <div class="user-box">
+          <div class="nes-table-responsive">
+        <table class="nes-table is-bordered is-centered">
+          <thead>
+            <tr>
+              <th class="d-flex justify-content-between p-3">
+                <p class="m-0">name:ユーザー</p>
+                <p class="m-0">level:ビギナー</p>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="d-flex justify-content-between">
+                <div>
+                  <p class="m-0">HP:</p>
+                </div>
+                <div class="container">
+                  <progress class="nes-progress is-success" id="life_user" value="100" max="100"></progress>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <button class="start">呪文を唱える</button>
-    <button class="finish disable">終了</button>
-    <%= link_to '結果画面へ', games_result_path(:monster_id => @monster.id), class: "disable",id: "result"%>
+<div class="nes-container is-rounded mt-3 text-center">
+  <h2>レシピを唱えろ!!</h2>
+  <button class="start nes-btn is-primary">呪文を唱える</button>
+  <button class="finish disable">終了</button>
+  <%= link_to '結果画面へ', games_result_path(:monster_id => @monster.id), class: "disable",id: "result"%>
 
-    <div>
+    <div class="speech-result-box disable">
         <p class="phrase">ここに認識させたい文字が表示されます</p>
         <p class="result">ここに正解かどうか表示されます</p>
         <p class="output">ここに認識された音声が表示されます</p>
     </div>
-
-    <div class="container">
-      <progress class="nes-progress is-success" id="life_user" value="100" max="100"></progress>
-    </div>
-
+</div>
 <%= audio_tag 'correct.mp3', id: "correct" %>
 <%= audio_tag 'damege.mp3', id: "damege" %>
 <%= audio_tag 'clear.mp3', id: "clear" %>
@@ -58,6 +104,7 @@ var recognizedSentences = document.querySelector('.output');
 var startBtn = document.querySelector('.start');
 var finishBtn = document.querySelector('.finish');
 var resultLink = document.querySelector('#result');
+var resultBox = document.querySelector('.speech-result-box');
 var count = 0
 
 const lifeBar_user = document.getElementById('life_user')         // ライフバー
