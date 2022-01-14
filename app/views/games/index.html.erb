@@ -71,7 +71,7 @@
     </div>
 
 <div class="nes-container is-rounded mt-3 text-center">
-  <h2>レシピを唱えろ!!</h2>
+  <h2 class="encourage_to_speech">レシピを唱えろ!!</h2>
   <button class="start nes-btn is-primary">呪文を唱える</button>
   <button class="finish disable">終了</button>
   <%= link_to '結果画面へ', games_result_path(:monster_id => @monster.id), class: "disable",id: "result"%>
@@ -105,6 +105,7 @@ var startBtn = document.querySelector('.start');
 var finishBtn = document.querySelector('.finish');
 var resultLink = document.querySelector('#result');
 var resultBox = document.querySelector('.speech-result-box');
+var encourageSpeech = document.querySelector('.encourage_to_speech');
 var count = 0
 
 const lifeBar_user = document.getElementById('life_user')         // ライフバー
@@ -117,6 +118,7 @@ let life_monster = 100                                              // ライフ
 function voiceInput() {
 
   resultBox.classList.remove("disable");
+  encourageSpeech.classList.add("disable");
   startBtn.disabled = true;
   startBtn.textContent = '認識中';
 
