@@ -6,3 +6,5 @@
 //= link clear.mp3
 //= link gameover.mp3
 //= link battle.mp3
+//= link spel.mp3
+//= link uncorrect.mp3
