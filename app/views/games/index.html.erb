@@ -14,6 +14,9 @@
     </form>
   </dialog>
 </section>
+
+<button class="nes-btn mt-3" id="BGM">BGM</button>
+
     
       <div class="nes-table-responsive">
         <table class="nes-table is-bordered ms-auto">
@@ -91,6 +94,17 @@
 <%= audio_tag 'battle.mp3',loop: true, id: "battle_music" %>
 <script>
 var battleStartBtn = document.querySelector('.battle-start');
+var bgmBtn = document.querySelector('#BGM');
+
+bgmBtn.addEventListener('click', startStop);
+function startStop() {
+  if (battle_music.paused) {
+    battle_music.play();
+  }  else {
+    battle_music.pause();
+  }
+}
+
 battleStartBtn.addEventListener('click', musicStart);
 function musicStart() {
   battle_music.play();
