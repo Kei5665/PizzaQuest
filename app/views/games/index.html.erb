@@ -10,7 +10,7 @@
     <form method="dialog">
       <h5 class="title text-center">Game Start!!</h5>
       <p class="text-center">モンスターが現れた!!</p>
-      <button class="nes-btn is-primary w-100">Start</button>
+      <button class="nes-btn is-primary w-100 battle-start">Start</button>
     </form>
   </dialog>
 </section>
@@ -88,7 +88,14 @@
 <%= audio_tag 'damege.mp3', id: "damege" %>
 <%= audio_tag 'clear.mp3', id: "clear" %>
 <%= audio_tag 'gameover.mp3', id: "gameover" %>
-<%= audio_tag 'battle.mp3', id: "battle_music" %>
+<%= audio_tag 'battle.mp3',loop: true, id: "battle_music" %>
+<script>
+var battleStartBtn = document.querySelector('.battle-start');
+battleStartBtn.addEventListener('click', musicStart);
+function musicStart() {
+  battle_music.play();
+}
+</script>
 <script>
 var myModal = document.getElementById('dialog-rounded');
 document.onreadystatechange = function () {
@@ -149,6 +156,7 @@ function voiceInput() {
       resultPara.textContent = 'モンスターはダメージを受けた!!';
       resultPara.style.background = 'lime';
       alterLife_monster(user_attack_point)
+      battle_music.pause();
       correct.play();
       count++;
 
