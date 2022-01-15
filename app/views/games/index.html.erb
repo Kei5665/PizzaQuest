@@ -169,7 +169,7 @@ function voiceInput() {
     var speechResult = event.results[0][0].transcript;
     recognizedSentences.textContent = '「　' + speechResult + '　」' + 'という音声が認識されました';
     if(speechResult === phrase) {
-      resultPara.textContent = 'モンスターはダメージを受けた!!';
+      resultPara.textContent = '呪文を唱えた!!モンスターはダメージを受けた!!';
       resultPara.style.background = 'lime';
       alterLife_monster(user_attack_point);
       spel.play();
@@ -180,7 +180,7 @@ function voiceInput() {
         startBtn.textContent = '次のターンへ';
         } else {
             //終了
-            resultPara.textContent = 'モンスターはダメージを受けた!!工程が全て終了した';
+            resultPara.textContent = '呪文を唱えた!!モンスターはダメージを受けた!!';
             lifeBar_monster.value = 0;
             battle_music.pause()
             startBtn.classList.add("disable");
@@ -189,7 +189,7 @@ function voiceInput() {
         }
 
     } else {
-      resultPara.textContent = '想定外の答えです';
+      resultPara.textContent = '呪文が正しくありません';
       resultPara.style.background = 'red';
       startBtn.textContent = 'やり直す';
       uncorrect.play();
