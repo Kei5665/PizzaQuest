@@ -7,12 +7,8 @@ class Admin::MonsterRecipesController < ApplicationController
   end
 
   def create
-    monster_recipe_params[:recipe_id].each do | r |
-      monster_recipe = MonsterRecipe.new(recipe_id: r.to_i)
-      monster_recipe.monster_id = monster_recipe_params[:monster_id]
-      monster_recipe.save!
-    end
-    redirect_to admin_monsters_path
+    @monster = MonsterRecipe.new(monster_recipe_params)
+    @monster.save!
   end
 
   def destroy

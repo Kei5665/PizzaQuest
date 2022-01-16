@@ -1,9 +1,11 @@
-<%= form_with model: @monster_recipe, url: admin_monster_recipes_path do |f| %>
+<%= form_with model: @monster_recipe, url: admin_monster_recipes_path,local: false do |f| %>
 <%= render 'shared/error_messages', object: f.object %>
     <%= f.label :monster_id %>
     <%= f.select :monster_id, Monster.pluck(:name, :id), class: 'form-control'  %>
-    <%= f.collection_check_boxes(:recipe_id, Recipe.all, :id, :name, include_hidden: false) do |b| %>
-      <%= b.label { b.check_box + b.text } %>
-    <% end %>
+    <%= f.label :recipe_id %>
+    <%= f.select :recipe_id, Recipe.pluck(:name, :id), class: 'form-control'  %>
+    <%= f.label :order_num %>
+    <%= f.number_field :order_num,class:'form-control' %>
     <%= f.submit "一括登録"%>
 <%end%> 
+<%= link_to 'モンスター一覧へ', admin_monsters_path %>
