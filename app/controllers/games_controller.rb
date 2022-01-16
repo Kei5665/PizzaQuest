@@ -6,7 +6,8 @@ class GamesController < ApplicationController
     gon.user_attack_point = user_attack_point
 
     names = []
-    @monster.recipes.each do |recipe|
+    recipe_order = @monster.recipes.order(:order_num)
+    recipe_order.each do |recipe|
       names.push(recipe.name)
     end
     gon.names = names
