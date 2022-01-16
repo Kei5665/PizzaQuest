@@ -20,6 +20,6 @@ class Admin::MonsterRecipesController < ApplicationController
   private
 
   def monster_recipe_params
-    params.require(:monster_recipe).permit(:monster_id, recipe_id: [])
+    params.require(:monster_recipe).permit(:monster_id, :recipe_id, :order_num)
   end
 end
