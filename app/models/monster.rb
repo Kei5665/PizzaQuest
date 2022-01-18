@@ -17,4 +17,8 @@ class Monster < ApplicationRecord
     end
     recipe_arr
   end
+
+  def calculate_gold
+    self.level * 100
+  end
 end

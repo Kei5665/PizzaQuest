@@ -8,10 +8,15 @@ class GamesController < ApplicationController
 
   def result
     @monster = Monster.find_by(id: params[:monster_id])
-    @gold = @monster.level * 100
+    @gold = @monster.calculate_gold
 
     @level_current = Level.first
     @level_next = Level.second
     @require_point = @level_next.required_gold - @level_current.required_gold
+
+    # Userモデルを作ったら以下に書き換える↓
+    # @level_current = user.level
+    # @level_next = user.level.next
+    # @require_point = @level_next.required_gold - @level_current.required_gold
   end
 end
