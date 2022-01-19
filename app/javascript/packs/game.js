@@ -18,8 +18,6 @@ document.addEventListener('turbolinks:load', () => {
     
   const lifeBar_user = document.getElementById('life_user')         // ライフバー
   const lifeBar_monster = document.getElementById('life_monster')         // ライフバー
-  const increaseBtn = document.getElementById('increase-btn') // + ボタン
-  const decreaseBtn = document.getElementById('decrease-btn') // - ボタン
   let life = 100                                              // ライフ初期値
   let life_monster = 100                                              // ライフ初期値
     
