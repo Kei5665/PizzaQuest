@@ -1,6 +1,5 @@
 class Admin::MonsterRecipesController < ApplicationController
-  def index
-  end
+  def index; end
 
   def new
     @monster_recipe = MonsterRecipe.new

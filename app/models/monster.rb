@@ -5,13 +5,13 @@ class Monster < ApplicationRecord
   validates :level, presence: true
 
   def user_attack_point
-    100 / self.recipes.size
+    100 / recipes.size
   end
 
   def recipe_arr
     recipe_arr = []
 
-    recipe_order = self.recipes.order(:order_num)
+    recipe_order = recipes.order(:order_num)
     recipe_order.each do |recipe|
       recipe_arr.push(recipe.name)
     end
@@ -19,6 +19,6 @@ class Monster < ApplicationRecord
   end
 
   def calculate_gold
-    self.level * 100
+    level * 100
   end
 end
