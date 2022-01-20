@@ -2,23 +2,21 @@ class GamesController < ApplicationController
   def index
     @monster = Monster.find_by(id: params[:monster_id])
 
-    user_attack_point = 100 / @monster.recipes.size
-    gon.user_attack_point = user_attack_point
-
-    names = []
-    recipe_order = @monster.recipes.order(:order_num)
-    recipe_order.each do |recipe|
-      names.push(recipe.name)
-    end
-    gon.names = names
+    gon.user_attack_point = @monster.user_attack_point
+    gon.names = @monster.recipe_arr
   end
 
   def result
     @monster = Monster.find_by(id: params[:monster_id])
-    @gold = @monster.level * 100
+    @gold = @monster.calculate_gold
 
     @level_current = Level.first
     @level_next = Level.second
     @require_point = @level_next.required_gold - @level_current.required_gold
+
+    # Userモデルを作ったら以下に書き換える↓
+    # @level_current = user.level
+    # @level_next = user.level.next
+    # @require_point = @level_next.required_gold - @level_current.required_gold
   end
 end

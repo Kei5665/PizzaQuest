@@ -1,0 +1,15 @@
+<div class="nes-container is-rounded mt-3 text-center">
+  <h2 class="encourage_to_speech">レシピを唱えろ!!</h2>
+  <button class="start nes-btn is-primary">呪文を唱える</button>
+  <button class="finish disable nes-btn is-success">終了</button>
+  <button class="restart disable nes-btn is-error"></button>
+  <%= link_to 'やり直す', games_path(:monster_id => @monster.id), class: "disable nes-btn is-error",id: "restart"%>
+  <%= link_to '結果画面へ', games_result_path(:monster_id => @monster.id), class: "disable nes-btn is-success",id: "result"%>
+
+    <div class="speech-result-box disable">
+        <p class="phrase">ここに認識させたい文字が表示されます</p>
+        <p class="result">ここに正解かどうか表示されます</p>
+        <p class="output">ここに認識された音声が表示されます</p>
+    </div>
+</div>
+<button class="nes-btn mt-3" id="BGM">BGM</button>

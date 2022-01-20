@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'games#index'
+  root 'monsters#index'
   get '/games/result', to: 'games#result'
   get '/games', to: 'games#index'
 

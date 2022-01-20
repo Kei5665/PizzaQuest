@@ -1,25 +1,23 @@
 <div class="col-sm-12 col-lg-4 mb-3">
   <div class="card">
     <div class="card-body">
-    <h4 class="card-title">
-        <%= monster.name%>
-    </h4>
-    <ul class="list-inline">
+      <h4 class="card-title"><%= monster.name%></h4>
+      <ul class="list-inline">
         <li class="list-inline-item">ID:<%= monster.id%></li>
         <li class="list-inline-item">レベル:<%= monster.level%></li>
-    </ul>
-    <p class="card-text"><%= monster.detail%></p>
-    <h5>素材一覧</h5>
-    <ul>
-    <% monster.recipes.each do |recipe|%>
-        <li><%= recipe.name%><%= recipe.gram%></li>
-
-        <li class="list-inline-item">
-        <%= button_to '削除',admin_monster_recipe_path(recipe.monster_recipes.find_by(monster_id: monster.id)), method: :delete, data: { confirm: '削除しますか？' }, class: 'btn btn-sm btn-danger'%>
-        </li>
-
-    <%end%>
-    </ul>
+      </ul>
+      <p class="card-text"><%= monster.detail%></p>
+      <h5>素材一覧</h5>
+      <ul>
+        <% monster.recipes.each do |recipe|%>
+          <li>
+            <%= recipe.name%><%= recipe.gram%>
+          </li>
+          <li class="list-inline-item">
+            <%= button_to '削除',admin_monster_recipe_path(recipe.monster_recipes.find_by(monster_id: monster.id)), method: :delete, data: { confirm: '削除しますか？' }, class: 'btn btn-sm btn-danger'%>
+          </li>
+        <%end%>
+      </ul>
     </div>
   </div>
 </div>
