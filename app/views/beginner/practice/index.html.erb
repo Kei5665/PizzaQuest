@@ -145,9 +145,8 @@ function nextquestion() {
         changescene(next, scecegame);
         showQuestion();
     } else {
-        questionnum = 0;
-        changescene(next, scecegame);
-        showQuestion();
+        // クイズが終了した場合
+        window.location.href = 'http://localhost:3000/beginner/practice/result'
     }
 }
 

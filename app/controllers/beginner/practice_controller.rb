@@ -21,4 +21,8 @@ class Beginner::PracticeController < Beginner::BaseController
     gon.monster_names = monster_names
     
   end
+
+  def result
+    
+  end
 end
