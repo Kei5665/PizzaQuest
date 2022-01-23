@@ -40,14 +40,15 @@
 </div>
 
 <script>
-
 //問題
-const question = [
-    {
-        q: "標高の高い順に並べ替えてください",
-        a: gon.monsters[0]
-    }
-];
+var question = [];
+
+monster_recipes = gon.monster_recipes
+monster_names = gon.monster_names
+
+for (let i = 0; i < monster_recipes.length ; i++) {
+    question.push({"q":monster_names[i],"a":monster_recipes[i]})
+}
 
 //top画面
 const scenetop = document.querySelector("#start");
