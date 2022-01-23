@@ -133,7 +133,7 @@ function Judgment() {
     if (JSON.stringify(question[questionnum].a) == JSON.stringify(answers)) {
         next.innerHTML = "<p style='font-size:3em;color:#f00;'>正解です！!</p><button onclick='nextquestion()'>次の問題</button>";
     } else {
-        next.innerHTML = "<p style='font-size:3em;color:#000;'>不正解...</p><button onclick='nextquestion()'>次の問題</button>";
+        next.innerHTML = "<p style='font-size:3em;color:#000;'>不正解...</p><button onclick='nextquestion()'>次の問題</button><p style='font-size:3em;color:#000;'>正解の並び</p>" + JSON.stringify(question[questionnum].a) + "<p style='font-size:3em;color:#000;'>あなたの答え</p>" + JSON.stringify(answers);
     }
 }
 
