@@ -1,3 +1,8 @@
+  <div class="is-hidden" id="result-modal">
+    <p id="result"></p>
+    <button class="nes-btn is-primary w-100 battle-start">レベル一覧へ</button>
+  </div>
+
 <div id="start">
     <p>大変だ!注文のピークがきてしまった!</p>
     <p>急いでピザを作らなきゃ!!</p>
@@ -95,6 +100,12 @@ const coutdownTimer =  ( tickCallBack , endCallBack
 <script>
 //問題
 var question = [];
+var correct_count = 0;
+
+// 正答率表示モーダル
+var resultModal = document.getElementById('result-modal');
+var result = document.getElementById('result');
+
 
 monster_recipes = gon.monster_recipes
 monster_names = gon.monster_names
@@ -186,6 +197,7 @@ function Judgment() {
     changescene(scecegame, next);
     if (JSON.stringify(question[questionnum].a) == JSON.stringify(answers)) {
         next.innerHTML = "<p style='font-size:3em;color:#f00;'>正解です！!</p><button onclick='nextquestion()'>次の問題</button>";
+        correct_count++;
     } else {
         next.innerHTML = "<p style='font-size:3em;color:#000;'>不正解...</p><button onclick='nextquestion()'>次の問題</button><p style='font-size:3em;color:#000;'>正解の並び</p>" + JSON.stringify(question[questionnum].a) + "<p style='font-size:3em;color:#000;'>あなたの答え</p>" + JSON.stringify(answers);
     }
@@ -200,7 +212,8 @@ function nextquestion() {
         showQuestion();
     } else {
         // クイズが終了した場合
-        window.location.href = 'http://localhost:3000/beginner/practice/result'
+        resultModal.classList.remove('is-hidden');
+        result.textContent = questionnum + '問中' + correct_count + '問正解!!';
     }
 }
 
