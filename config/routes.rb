@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get '/beginner/practice', to: 'beginner/practice#index'
   get '/beginner/practice/result', to: 'beginner/practice#result'
   get '/beginner/trial', to: 'beginner/trial#index'
-  get '/beginner/practice/result', to: 'beginner/practice#result'
+  get '/beginner/trial/result', to: 'beginner/trial#result'
 
   namespace :admin do 
     resources :monsters
