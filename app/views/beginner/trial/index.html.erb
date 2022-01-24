@@ -81,7 +81,7 @@ const coutdownTimer =  ( tickCallBack , endCallBack
     tickCallBack( calcTime(sec) );
  
         // タイマースタート（1秒間隔)
-    const timer = setInterval(
+    timer = setInterval(
         ()=>{
                 // 残り時間を秒で計算
             let nowSec= sec - Math.floor( (Date.now() - startTime) / 1000 );
@@ -149,7 +149,8 @@ function gamestart() {
 
 //並べ替えクイズの処理
 function showQuestion() {
-    coutdownTimer( tickFunc , endFunc , 5 );
+    clearInterval(timer);
+    coutdownTimer( tickFunc , endFunc , 10 );
     //答えを格納している配列を初期化
     answers.length = 0; 
     for (let i = 0; i < 6; i++) {
