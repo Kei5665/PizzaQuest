@@ -214,6 +214,7 @@ function nextquestion() {
         showQuestion();
     } else {
         // クイズが終了した場合
+        clearInterval(timer);
         resultModal.classList.remove('is-hidden');
         next.classList.remove("is-visible")
         result.textContent = questionnum + '問中' + correct_count + '問正解!!';
