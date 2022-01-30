@@ -8,3 +8,4 @@
 //= link battle.mp3
 //= link spel.mp3
 //= link uncorrect.mp3
+//= link select.mp3
