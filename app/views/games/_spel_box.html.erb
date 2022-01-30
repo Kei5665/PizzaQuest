@@ -1,8 +1,6 @@
-  <div class="lists">
-  <p class="text-center">選択し終わったレシピ</p>
-    <ul class="nes-list is-circle">
-    </ul>
-  </div>
+<div class="lists disable nes-container with-title is-centered mt-1">
+  <p class="title">選択済みのレシピ</p>
+</div>
 
 <div class="nes-container is-rounded mt-3 text-center">
   <h2 class="encourage_to_speech">レシピを唱えろ!!</h2>
@@ -41,6 +39,10 @@
   var finishBtn = document.querySelector('.finish');
   var restartBtn = document.querySelector('#restart');
   var resultLink = document.querySelector('#result');
+
+    // すでに選択したレシピを表示させる場所
+  var recipeList = document.querySelector('.lists');
+
   
   // ライフゲージ
   const lifeBar_user = document.getElementById('life_user')
@@ -48,9 +50,6 @@
   // ライフゲージ初期値
   let life = 100
   let life_monster = 100
-
-  // すでに選択したレシピを表示させる場所
-  var recipeList = document.querySelector('.nes-list');
 
   // 次のレシピに進むためのカウント
   var count = 0
@@ -64,6 +63,7 @@ function gameStart() {
     hintBtn.classList.remove("disable");
     encourageSpeech.classList.add("disable");
     startBtn.classList.add("disable");
+    recipeList.classList.remove("disable");
     resultPara.textContent = '正誤判定中';
     resultPara.style.background = 'rgba(0,0,0,0.2)';
     select.play();
