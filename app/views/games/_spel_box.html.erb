@@ -102,6 +102,7 @@ function hint() {
         lifeBar_monster.value = 0;
         battle_music.pause()
         startBtn.classList.add("disable");
+        hintBtn.classList.add("disable");
         finishBtn.classList.remove("disable");
         finishBtn.addEventListener('click', battleFinish);
       }
@@ -153,6 +154,15 @@ function hint() {
     // ライフバーの値を更新する
     lifeBar_monster.value = life_monster
   }
+
+    // モンスターを倒した場合
+    function battleFinish () {
+        // 効果音
+        clear.play();
+        resultPara.textContent = 'モンスターを倒した!!';
+        finishBtn.classList.add("disable");
+        resultLink.classList.remove("disable");
+    }
 
     
 </script>
