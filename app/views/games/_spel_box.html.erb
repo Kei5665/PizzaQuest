@@ -7,9 +7,144 @@
   <%= link_to '結果画面へ', games_result_path(:monster_id => @monster.id), class: "disable nes-btn is-success",id: "result"%>
 
     <div class="speech-result-box disable">
-        <p class="phrase">ここに認識させたい文字が表示されます</p>
-        <p class="result">ここに正解かどうか表示されます</p>
-        <p class="output">ここに認識された音声が表示されます</p>
+      <p class="result">ここに正解かどうか表示されます</p>
+      <% @monster.recipes.shuffle.each_with_index do |recipe,i| %>
+        <button class='button float-right nes-btn' id='<%=i%>' onclick="battle()"><%= recipe.name %></button>
+      <%end%>
     </div>
 </div>
 <button class="nes-btn mt-3" id="BGM">BGM</button>
+
+<div class="lists">
+<p class="text-center">選択し終わったレシピ</p>
+  <ul class="nes-list is-circle">
+  </ul>
+</div>
+
+
+<script>
+  // monsterコントローラーからのパラメータ
+  var phrases = gon.names
+  var user_attack_point = gon.user_attack_point
+
+  // 「レシピを唱えろ!!」部分
+  var encourageSpeech = document.querySelector('.encourage_to_speech');
+
+  // 音声認識の結果を表示する要素
+  var resultPara = document.querySelector('.result');
+  var resultBox = document.querySelector('.speech-result-box');
+    
+  // 処理を実行するボタンとリンク
+  var startBtn = document.querySelector('.start');
+  var finishBtn = document.querySelector('.finish');
+  var restartBtn = document.querySelector('#restart');
+  var resultLink = document.querySelector('#result');
+  
+  // ライフゲージ
+  const lifeBar_user = document.getElementById('life_user')
+  const lifeBar_monster = document.getElementById('life_monster')
+  // ライフゲージ初期値
+  let life = 100
+  let life_monster = 100
+
+  // すでに選択したレシピを表示させる場所
+  var recipeList = document.querySelector('.nes-list');
+
+  // 次のレシピに進むためのカウント
+  var count = 0
+
+  startBtn.addEventListener('click', gameStart);   
+
+function gameStart() {
+      //「レシピを唱えろ!!」部分を消して音声認識boxを表示
+    resultBox.classList.remove("disable");
+    encourageSpeech.classList.add("disable");
+    startBtn.disabled = true;
+    startBtn.textContent = 'バトル中';
+    resultPara.textContent = '正誤判定中';
+    resultPara.style.background = 'rgba(0,0,0,0.2)';
+
+}
+
+  function battle() {
+
+    var target = event.target;
+
+    // レシピのカウント番目をphraseにする
+    var phrase = phrases[count];
+
+    // レシピと入力された音声が同じかどうか判定
+    if(target.innerHTML === phrase) {
+      // 正解の場合
+      resultPara.textContent = '呪文を唱えた!!モンスターはダメージを受けた!!';
+      resultPara.style.background = 'lime';
+      alterLife_monster(user_attack_point);
+      spel.play();
+      damege.play();
+      count++;
+      target.remove();
+      recipeList.appendChild(target);
+
+      // レシピが残っていたら次のレシピへ
+      if (count < phrases.length) {
+        startBtn.textContent = '次のターンへ';
+      } else {
+        // 残りのレシピがない場合はfinishBtnを出力
+        resultPara.textContent = '呪文を唱えた!!モンスターはダメージを受けた!!';
+        lifeBar_monster.value = 0;
+        battle_music.pause()
+        startBtn.classList.add("disable");
+        finishBtn.classList.remove("disable");
+        finishBtn.addEventListener('click', battleFinish);
+      }
+    } else {
+        // 不正解の場合
+        resultPara.textContent = '呪文が正しくありません';
+        resultPara.style.background = 'red';
+        startBtn.textContent = 'やり直す';
+        uncorrect.play();
+        alterLife( -25 )
+    }
+  }
+
+    // ライフゲージ変更処理
+  function alterLife( value ){
+    // lifeの値を算出する
+    life += value 
+    if ( life <= 0 ){
+      // 算出の結果 0 以下になった場合
+      life = 0
+      // ゲームオーバの表示
+      resultPara.textContent = '体力が0になった';
+      resultPara.style.background = 'red';
+      startBtn.classList.add("disable");
+      finishBtn.classList.remove("disable");
+      finishBtn.addEventListener('click', gameOver);
+    } else {
+      // 算出の結果 100 を超過した場合
+      if ( life > 100 ) {
+          life = 100
+      }
+    }
+    // ライフバーの値を更新する
+    lifeBar_user.value = life
+  }
+    
+  function alterLife_monster( value ){
+    // lifeの値を算出する
+    life_monster -= value 
+    if ( life_monster <= 0 ){
+      // 算出の結果 0 以下になった場合
+      life_monster = 0      
+    } else {
+      // 算出の結果 100 を超過した場合
+      if ( life_monster > 100 ) {
+        life_monster = 100
+      }
+    }
+    // ライフバーの値を更新する
+    lifeBar_monster.value = life_monster
+  }
+
+    
+</script>
