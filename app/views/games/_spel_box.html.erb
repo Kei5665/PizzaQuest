@@ -7,8 +7,7 @@
   <button class="start nes-btn is-primary">呪文を唱える</button>
   <button class="hint disable nes-btn is-success">ヒント</button>
   <button class="finish disable nes-btn">終了</button>
-  <button class="restart disable nes-btn is-error"></button>
-  <%= link_to 'やり直す', games_path(:monster_id => @monster.id), class: "disable nes-btn is-error",id: "restart"%>
+  <button class="restart disable nes-btn is-error">やり直す</button>
   <%= link_to '結果画面へ', games_result_path(:monster_id => @monster.id), class: "disable nes-btn is-success",id: "result"%>
 
     <div class="speech-result-box disable">
@@ -37,7 +36,7 @@
   var startBtn = document.querySelector('.start');
   var hintBtn = document.querySelector('.hint');
   var finishBtn = document.querySelector('.finish');
-  var restartBtn = document.querySelector('#restart');
+  var restartBtn = document.querySelector('.restart');
   var resultLink = document.querySelector('#result');
 
     // すでに選択したレシピを表示させる場所
@@ -56,6 +55,7 @@
 
   startBtn.addEventListener('click', gameStart);   
   hintBtn.addEventListener('click', hint);   
+  restartBtn.addEventListener('click', restart);   
 
 function gameStart() {
       //「レシピを唱えろ!!」部分を消して音声認識boxを表示
@@ -72,6 +72,10 @@ function gameStart() {
 function hint() {
   resultPara.textContent = phrases[count].slice( 0, 1 )
   resultPara.style.background = 'rgba(0,0,0,0.2)';
+}
+
+function restart() {
+  location.reload();
 }
 
   function battle() {
@@ -170,7 +174,6 @@ function hint() {
         // 効果音
         gameover.play();
         resultPara.textContent = '目の前が真っ暗になった';
-        restartBtn.textContent = '最初からやり直す';
         finishBtn.classList.add("disable");
         restartBtn.classList.remove("disable")
     }
