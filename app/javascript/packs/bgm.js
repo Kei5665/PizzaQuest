@@ -12,8 +12,4 @@ document.addEventListener('turbolinks:load', () => {
     }
   }
     
-  battleStartBtn.addEventListener('click', musicStart);
-  function musicStart() {
-    battle_music.play();
-  }      
 })
