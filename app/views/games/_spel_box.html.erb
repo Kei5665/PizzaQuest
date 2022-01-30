@@ -59,7 +59,7 @@ function gameStart() {
       //「レシピを唱えろ!!」部分を消して音声認識boxを表示
     resultBox.classList.remove("disable");
     encourageSpeech.classList.add("disable");
-    startBtn.disabled = true;
+    startBtn.classList.add("disable");
     startBtn.textContent = 'バトル中';
     resultPara.textContent = '正誤判定中';
     resultPara.style.background = 'rgba(0,0,0,0.2)';
