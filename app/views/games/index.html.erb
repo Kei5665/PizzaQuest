@@ -1,7 +1,6 @@
 <%= render 'audio' %>
 
 <div class="container">
-  <%= render 'start_modal' %>
   <%= render 'monster_info' %>
   <div class="monster-img-box text-center">
     <i class="nes-mario my-4 mx-auto"></i>
@@ -9,3 +8,21 @@
   <%= render 'user_info' %>
   <%= render 'spel_box' %>
 </div>
+
+<script>
+  var battleStartBtn = document.querySelector('.battle-start');
+  var bgmBtn = document.querySelector('#BGM');
+    
+  bgmBtn.addEventListener('click', startStop);
+  function startStop() {
+    if (battle_music.paused) {
+      battle_music.play();
+    } else {
+      battle_music.pause();
+    }
+  }
+</script>
+
+<script>
+
+</script>
