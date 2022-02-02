@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_02_031520) do
+ActiveRecord::Schema.define(version: 2022_02_02_053034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 2022_02_02_031520) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "recipe_grams", force: :cascade do |t|
+    t.bigint "recipe_id", null: false
+    t.bigint "gram_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["gram_id"], name: "index_recipe_grams_on_gram_id"
+    t.index ["recipe_id"], name: "index_recipe_grams_on_recipe_id"
+  end
+
   create_table "recipes", force: :cascade do |t|
     t.string "name", null: false
     t.string "gram", null: false
@@ -53,19 +62,8 @@ ActiveRecord::Schema.define(version: 2022_02_02_031520) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "email", null: false
-    t.string "crypted_password"
-    t.string "salt"
-    t.string "name", null: false
-    t.integer "role", default: 0, null: false
-    t.integer "gold_points", default: 0, null: false
-    t.string "level", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-  end
-
   add_foreign_key "monster_recipes", "monsters"
   add_foreign_key "monster_recipes", "recipes"
+  add_foreign_key "recipe_grams", "grams"
+  add_foreign_key "recipe_grams", "recipes"
 end
