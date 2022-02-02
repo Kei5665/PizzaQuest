@@ -1,0 +1,2 @@
+class RecipeGram < ApplicationRecord
+end
