@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_16_080120) do
+ActiveRecord::Schema.define(version: 2022_02_02_031520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "grams", force: :cascade do |t|
+    t.string "gram", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "levels", force: :cascade do |t|
     t.string "level_name", null: false
@@ -45,6 +51,19 @@ ActiveRecord::Schema.define(version: 2022_01_16_080120) do
     t.string "gram", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "crypted_password"
+    t.string "salt"
+    t.string "name", null: false
+    t.integer "role", default: 0, null: false
+    t.integer "gold_points", default: 0, null: false
+    t.string "level", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "monster_recipes", "monsters"
