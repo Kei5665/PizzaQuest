@@ -1,5 +1,10 @@
 <div class="lists disable nes-container with-title is-centered mt-1">
   <p class="title">選択済みのレシピ</p>
+  <div class="selected-recipes">
+  <% @monster.recipes.order(:order_num).each do |recipe| %>
+    <button class='button float-right nes-btn disable'><%= recipe.name %></button>
+  <%end%>
+  </div>
 </div>
 
 <div class="nes-container is-rounded mt-3 text-center">
@@ -52,6 +57,7 @@
 
     // すでに選択したレシピを表示させる場所
   var recipeList = document.querySelector('.lists');
+  var selectedRecipes = document.querySelector('.selected-recipes');
 
     // グラムを表示させる場所
   var grams = gon.grams
@@ -117,6 +123,7 @@ function restart() {
     if(target.innerHTML === answer) {
       // 正解の場合
       gramList.children[count].classList.add("disable")
+      selectedRecipes.children[count].classList.remove("disable");
       resultPara.textContent = '呪文を唱えた!!モンスターはダメージを受けた!!';
       resultPara.style.background = 'lime';
       alterLife_monster(user_attack_point);
