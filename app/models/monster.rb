@@ -21,4 +21,30 @@ class Monster < ApplicationRecord
   def calculate_gold
     level * 100
   end
+
+  def gram_arr
+    recipe_gram_arr = []
+
+    recipes.each do |monster_recipe|
+      recipe = Recipe.find(monster_recipe.id)
+      gram_arr = []
+
+      recipe.grams.each do |gram|
+        gram_arr.push(gram.gram)
+      end
+
+      recipe_gram_arr.push(gram_arr)
+    end
+
+    recipe_gram_arr
+  end
+
+  def answer_grams
+    gram_answers = []
+
+    recipes.order(:order_num).each do |recipe|
+      gram_answers.push(recipe.gram)
+    end
+    gram_answers
+  end
 end
