@@ -7,6 +7,19 @@
   </div>
 </div>
 
+<div class="gram-over nes-container with-title is-centered is-rounded my-3 text-center disable">
+  <p class="title">グラム選択</p>
+  <div class="gram">
+  <% @monster.gram_arr.each_with_index do |gram,i| %>
+    <div class="disable" id="gram-<%=i%>">
+      <% gram.each do |g| %>
+      <button class="button float-right nes-btn" onclick="judge()"><%= g %></button>
+      <%end%>
+    </div>
+  <%end%>
+  </div>
+</div>
+
 <div class="nes-container is-rounded mt-3 text-center">
   <h2 class="encourage_to_speech">レシピを唱えろ!!</h2>
   <button class="start nes-btn is-primary">呪文を唱える</button>
@@ -23,17 +36,6 @@
     </div>
 </div>
 <button class="nes-btn mt-3" id="BGM">BGM</button>
-
-<div class="gram nes-container is-rounded my-3 text-center">
-<% @monster.gram_arr.each_with_index do |gram,i| %>
-<div class="disable" id="gram-<%=i%>">
-  <% gram.each do |g| %>
-   <button class="button float-right nes-btn" onclick="judge()"><%= g %></button>
-  <%end%>
-</div>
-<%end%>
-</div>
-
 
 
 <script>
@@ -63,6 +65,7 @@
   var grams = gon.grams
   var answer_grams = gon.answer_grams
   var gramList = document.querySelector('.gram');
+  var gramOver = document.querySelector('.gram-over');
   
   // ライフゲージ
   const lifeBar_user = document.getElementById('life_user')
@@ -85,6 +88,7 @@ function gameStart() {
     encourageSpeech.classList.add("disable");
     startBtn.classList.add("disable");
     recipeList.classList.remove("disable");
+    gramOver.classList.remove("disable");
     resultPara.textContent = '正誤判定中';
     resultPara.style.background = 'rgba(0,0,0,0.2)';
     select.play();
