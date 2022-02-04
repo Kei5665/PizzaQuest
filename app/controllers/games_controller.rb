@@ -4,6 +4,7 @@ class GamesController < ApplicationController
 
     gon.user_attack_point = @monster.user_attack_point
     gon.names = @monster.recipe_arr
+    gon.grams = @monster.gram_arr
   end
 
   def result

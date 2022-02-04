@@ -19,28 +19,16 @@
 </div>
 <button class="nes-btn mt-3" id="BGM">BGM</button>
 
-<div class="nes-container is-rounded my-3 text-center">
-<label>
-  <input type="radio" class="nes-radio" name="answer" checked />
-  <span>8g</span>
-</label>
-
-<label>
-  <input type="radio" class="nes-radio" name="answer" />
-  <span>12g</span>
-</label>
-
-<label>
-  <input type="radio" class="nes-radio" name="answer" />
-  <span>24g</span>
-</label>
-
-<label>
-  <input type="radio" class="nes-radio" name="answer" />
-  <span>36g</span>
-</label>
-
+<div class="gram nes-container is-rounded my-3 text-center">
+<% @monster.gram_arr.each_with_index do |gram,i| %>
+<div class="disable" id="gram-<%=i%>">
+  <% gram.each do |g| %>
+   <button class="button float-right nes-btn"><%= g %></button>
+  <%end%>
 </div>
+<%end%>
+</div>
+
 
 
 <script>
@@ -65,6 +53,9 @@
     // すでに選択したレシピを表示させる場所
   var recipeList = document.querySelector('.lists');
 
+    // グラムを表示させる場所
+  var grams = gon.grams
+  var gramList = document.querySelector('.gram');
   
   // ライフゲージ
   const lifeBar_user = document.getElementById('life_user')
@@ -110,6 +101,8 @@ function restart() {
 
     // レシピと入力された音声が同じかどうか判定
     if(target.innerHTML === phrase) {
+
+      gramList.children[count].classList.remove("disable");
       // 正解の場合
       resultPara.textContent = '呪文を唱えた!!モンスターはダメージを受けた!!';
       resultPara.style.background = 'lime';
