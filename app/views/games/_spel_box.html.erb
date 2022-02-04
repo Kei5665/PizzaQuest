@@ -29,7 +29,7 @@
   <%= link_to '結果画面へ', games_result_path(:monster_id => @monster.id), class: "disable nes-btn is-success",id: "result"%>
 
     <div class="speech-result-box disable">
-      <p class="result">ここに正解かどうか表示されます</p>
+      <p class="result">[ここに正解かどうか表示されます]</p>
       <% @monster.recipes.shuffle.each_with_index do |recipe,i| %>
         <button class='button float-right nes-btn' id='<%=i%>' onclick="battle()"><%= recipe.name %></button>
       <%end%>
@@ -89,8 +89,6 @@ function gameStart() {
     startBtn.classList.add("disable");
     recipeList.classList.remove("disable");
     gramOver.classList.remove("disable");
-    resultPara.textContent = '正誤判定中';
-    resultPara.style.background = 'rgba(0,0,0,0.2)';
     select.play();
 }
 
