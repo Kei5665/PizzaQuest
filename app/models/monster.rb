@@ -38,4 +38,13 @@ class Monster < ApplicationRecord
 
     recipe_gram_arr
   end
+
+  def answer_grams
+    gram_answers = []
+
+    recipes.order(:order_num).each do |recipe|
+      gram_answers.push(recipe.gram)
+    end
+    gram_answers
+  end
 end
