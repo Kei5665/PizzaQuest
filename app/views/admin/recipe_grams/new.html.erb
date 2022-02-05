@@ -6,7 +6,7 @@
   </div>
   <div>
     <%= f.label :gram_id %>
-    <%= f.select :gram_id, Recipe.pluck(:gram, :id), include_blank: true, class: 'form-control'  %>
+    <%= f.select :gram_id, Gram.pluck(:gram, :id), include_blank: true, class: 'form-control'  %>
   </div>
   <%= f.submit "一括登録"%>
 <%end%> 
