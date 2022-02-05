@@ -9,6 +9,16 @@
       </ul>
       <p class="card-text"><%= recipe.gram%></p>
       <%= button_to '削除',admin_recipe_path(recipe.id), method: :delete, data: { confirm: '削除しますか？' }, class: 'btn btn-sm btn-danger'%>
+      <ul>
+        <% recipe.grams.each do |gram|%>
+          <li>
+            <%= gram.gram%>
+          </li>
+          <li class="list-inline-item">
+            <%= button_to '削除',admin_recipe_gram_path(gram.recipe_grams.find_by(recipe_id: recipe.id)), method: :delete, data: { confirm: '削除しますか？' }, class: 'btn btn-sm btn-danger'%>
+          </li>
+        <%end%>
+      </ul>
     </div>
   </div>
 </div>

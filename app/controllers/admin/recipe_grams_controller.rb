@@ -13,7 +13,6 @@ class Admin::RecipeGramsController < ApplicationController
   def destroy
     recipe_gram = RecipeGram.find(params[:id])
     recipe_gram.destroy!
-    redirect_to admin_recipe_grams_path
   end
 
   private
