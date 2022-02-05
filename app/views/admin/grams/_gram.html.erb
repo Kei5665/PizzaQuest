@@ -7,6 +7,15 @@
       <ul class="list-inline">
         <li class="list-inline-item">ID:<%= gram.id%></li>
       </ul>
+      <p>recipe</p>
+      <ul>
+        <% gram.recipes.each do |recipe|%>
+          <li>
+            <%= recipe.name%>
+          </li>
+        <%end%>
+      </ul>
+
       <%= button_to '削除',admin_gram_path(gram.id), method: :delete, data: { confirm: '削除しますか？' }, class: 'btn btn-sm btn-danger'%>
     </div>
   </div>
