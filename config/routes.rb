@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :recipes
     resources :grams
     resources :monster_recipes
+    resources :recipe_grams
   end
 
   resources :monsters
