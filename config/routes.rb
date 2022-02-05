@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   namespace :admin do 
     resources :monsters
     resources :recipes
+    resources :grams
     resources :monster_recipes
   end
 

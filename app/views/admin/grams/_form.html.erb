@@ -1,0 +1,8 @@
+<h1>グラムを作る</h1>
+<%= form_with model: gram, url: admin_grams_path,class:'new_gram',local: false do |f|%>
+<%= render 'shared/error_messages', object: f.object %>
+    <%= f.label :gram %>
+    <%= f.text_field :gram,class:'form-control', rows: 10  %>
+  </div>
+  <%= f.submit class:'btn btn-primary'%>
+<%end%>
