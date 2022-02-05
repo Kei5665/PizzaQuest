@@ -8,6 +8,7 @@
         <li class="list-inline-item">ID:<%= recipe.id%></li>
       </ul>
       <p class="card-text"><%= recipe.gram%></p>
+      <%= button_to '削除',admin_recipe_path(recipe.id), method: :delete, data: { confirm: '削除しますか？' }, class: 'btn btn-sm btn-danger'%>
     </div>
   </div>
 </div>
