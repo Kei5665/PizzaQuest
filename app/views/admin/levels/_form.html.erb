@@ -1,0 +1,13 @@
+<h1>levelを作る</h1>
+<%= form_with model: level, url: admin_levels_path,class:'new_recipe',local: false do |f|%>
+<%= render 'shared/error_messages', object: f.object %>
+  <div>
+    <%= f.label :level_name %>
+    <%= f.text_field :level_name,class:'form-control' %>
+  </div>
+  <div>
+    <%= f.label :required_gold %>
+    <%= f.number_field :required_gold,class:'form-control', rows: 10  %>
+  </div>
+  <%= f.submit class:'btn btn-primary'%>
+<%end%>
