@@ -1,0 +1,12 @@
+<%= form_with model: @recipe_gram, url: admin_recipe_grams_path,local: false do |f| %>
+<%= render 'shared/error_messages', object: f.object %>
+  <div>
+    <%= f.label :recipe_id %>
+    <%= f.select :recipe_id, Recipe.pluck(:name, :id), include_blank: true, class: 'form-control'  %>
+  </div>
+  <div>
+    <%= f.label :gram_id %>
+    <%= f.select :gram_id, Gram.pluck(:gram, :id), include_blank: true, class: 'form-control'  %>
+  </div>
+  <%= f.submit "一括登録"%>
+<%end%> 

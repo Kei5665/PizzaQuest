@@ -16,6 +16,11 @@ class Admin::MonstersController < ApplicationController
     end
   end
 
+  def destroy
+    monster = Monster.find(params[:id])
+    monster.destroy!
+  end
+
   private
 
   def monster_params
