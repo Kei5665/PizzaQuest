@@ -12,6 +12,11 @@ class Admin::GramsController < ApplicationController
     @gram.save!
   end
 
+  def destroy
+    gram = Gram.find(params[:id])
+    gram.destroy!
+  end
+
   private
 
   def gram_params
