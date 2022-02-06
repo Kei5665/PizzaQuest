@@ -11,15 +11,15 @@
   </div>
 </div>
 
-<div class="spel-box nes-container is-rounded mt-3 pb-2 text-center">
+<div class="spel-box nes-container is-rounded mt-3 p-1 text-center">
   <h2 class="encourage_to_speech">レシピを唱えろ!!</h2>
   <button class="start nes-btn is-primary">呪文を唱える</button>
 
-  <div class="lists text-start disable">
+  <div class="lists disable">
     <p class="title d-inline">ひとつ前のレシピ</p>
     <div class="selected-recipes d-inline">
     <% @monster.recipes.order(:order_num).each do |recipe| %>
-      <button class='button float-right nes-btn disable'><%= recipe.name %></button>
+      <button class='button float-right nes-btn disable mb-1'><%= recipe.name %></button>
     <%end%>
     </div>
   </div>
@@ -31,7 +31,7 @@
     <div class="speech-result-box disable">
       <p class="result">食材を順番に並び替えろ!!</p>
       <% @monster.recipes.shuffle.each_with_index do |recipe,i| %>
-        <button class='button float-right nes-btn' id='<%=i%>' onclick="battle()"><%= recipe.name %></button>
+        <button class='button float-right nes-btn mb-1' id='<%=i%>' onclick="battle()"><%= recipe.name %></button>
       <%end%>
       <button class="hint disable nes-btn is-success">ヒント</button>
     </div>
