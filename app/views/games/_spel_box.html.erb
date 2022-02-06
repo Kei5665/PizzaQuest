@@ -88,7 +88,6 @@ function gameStart() {
     hintBtn.classList.remove("disable");
     encourageSpeech.classList.add("disable");
     startBtn.classList.add("disable");
-    recipeList.classList.remove("disable");
     gramOver.classList.remove("disable");
     select.play();
 }
@@ -129,6 +128,7 @@ function restart() {
     if(target.innerHTML === answer) {
       // 正解の場合
       gramList.children[count].classList.add("disable")
+      recipeList.classList.remove("disable");
 
       // １つ前のレシピを非表示にする。
       if(count > 0) {
