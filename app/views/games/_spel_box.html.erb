@@ -11,7 +11,7 @@
   </div>
 </div>
 
-<div class="nes-container is-rounded mt-3 text-center">
+<div class="spel-box nes-container is-rounded mt-3 text-center">
   <h2 class="encourage_to_speech">レシピを唱えろ!!</h2>
   <button class="start nes-btn is-primary">呪文を唱える</button>
 
@@ -46,6 +46,9 @@
 
   // 「レシピを唱えろ!!」部分
   var encourageSpeech = document.querySelector('.encourage_to_speech');
+
+  // ひとまとめ
+  var spelBox = document.querySelector('.spel-box');
 
   // 音声認識の結果を表示する要素
   var resultPara = document.querySelector('.result');
@@ -88,7 +91,6 @@ function gameStart() {
     hintBtn.classList.remove("disable");
     encourageSpeech.classList.add("disable");
     startBtn.classList.add("disable");
-    gramOver.classList.remove("disable");
     select.play();
 }
 
@@ -108,6 +110,9 @@ function restart() {
     // レシピと入力された音声が同じかどうか判定
     if(target.innerHTML === phrase) {
       gramList.children[count].classList.remove("disable");
+      spelBox.classList.add("disable");
+      gramOver.classList.remove("disable");
+
     } else {
         resultPara.textContent = '呪文が正しくありません';
         setTimeout(() => {
@@ -127,6 +132,8 @@ function restart() {
 
     if(target.innerHTML === answer) {
       // 正解の場合
+      gramOver.classList.add("disable");
+      spelBox.classList.remove("disable");
       gramList.children[count].classList.add("disable")
       recipeList.classList.remove("disable");
 
@@ -161,6 +168,8 @@ function restart() {
         }
     } else {
         // 不正解の場合
+        gramOver.classList.add("disable");
+        spelBox.classList.remove("disable");
         resultPara.textContent = '呪文が正しくありません';
         setTimeout(() => {
           resultPara.textContent = '';
