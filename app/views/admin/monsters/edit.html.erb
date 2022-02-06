@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+        <%= form_with model: @monster, url: admin_monster_path(@monster),class:'new_monster' do |f|%>
+        <%= render 'shared/error_messages', object: f.object %>
+        <div>
+            <%= f.label :name %>
+            <%= f.text_field :name,class:'form-control' %>
+        </div>
+        <div>
+            <%= f.label :level %>
+            <%= f.number_field :level,class:'form-control' %>
+        </div>
+        <div>
+            <%= f.label :detail %>
+            <%= f.text_area :detail,class:'form-control' %>
+        </div>
+        <%= f.submit class:'btn btn-primary'%>
+        <%end%>      
+    </div>
+  </div>
+</div>
