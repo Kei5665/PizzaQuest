@@ -1,12 +1,3 @@
-<div class="lists disable nes-container with-title is-centered mt-1">
-  <p class="title">選択済みのレシピ</p>
-  <div class="selected-recipes">
-  <% @monster.recipes.order(:order_num).each do |recipe| %>
-    <button class='button float-right nes-btn disable'><%= recipe.name %></button>
-  <%end%>
-  </div>
-</div>
-
 <div class="gram-over nes-container with-title is-centered is-rounded my-3 text-center disable">
   <p class="title">グラム選択</p>
   <div class="gram">
@@ -23,6 +14,16 @@
 <div class="nes-container is-rounded mt-3 text-center">
   <h2 class="encourage_to_speech">レシピを唱えろ!!</h2>
   <button class="start nes-btn is-primary">呪文を唱える</button>
+
+  <div class="lists text-start disable">
+    <p class="title">選択したひとつ前のレシピ</p>
+    <div class="selected-recipes">
+    <% @monster.recipes.order(:order_num).each do |recipe| %>
+      <button class='button float-right nes-btn disable'><%= recipe.name %></button>
+    <%end%>
+    </div>
+  </div>
+
   <button class="hint disable nes-btn is-success">ヒント</button>
   <button class="finish disable nes-btn">終了</button>
   <button class="restart disable nes-btn is-error">やり直す</button>
@@ -128,6 +129,12 @@ function restart() {
     if(target.innerHTML === answer) {
       // 正解の場合
       gramList.children[count].classList.add("disable")
+
+      // １つ前のレシピを非表示にする。
+      if(count > 0) {
+        selectedRecipes.children[count - 1].classList.add("disable");
+      }
+
       selectedRecipes.children[count].classList.remove("disable");
       resultPara.textContent = '呪文を唱えた!!モンスターはダメージを受けた!!';
       setTimeout(() => {
