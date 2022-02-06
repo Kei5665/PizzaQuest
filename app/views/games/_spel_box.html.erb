@@ -107,6 +107,8 @@ function restart() {
   function battle() {
     var target = event.target;
     var phrase = phrases[count];
+    
+    selected = target
 
     // レシピと入力された音声が同じかどうか判定
     if(target.innerHTML === phrase) {
@@ -133,6 +135,7 @@ function restart() {
 
     if(target.innerHTML === answer) {
       // 正解の場合
+      selected.remove();
       gramOver.classList.add("disable");
       spelBox.classList.remove("disable");
       gramList.children[count].classList.add("disable")
