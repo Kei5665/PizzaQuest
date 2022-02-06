@@ -16,7 +16,7 @@
   <button class="start nes-btn is-primary">呪文を唱える</button>
 
   <div class="lists text-start disable">
-    <p class="title">選択したひとつ前のレシピ</p>
+    <p class="title">ひとつ前のレシピ</p>
     <div class="selected-recipes">
     <% @monster.recipes.order(:order_num).each do |recipe| %>
       <button class='button float-right nes-btn disable'><%= recipe.name %></button>
@@ -29,7 +29,7 @@
   <%= link_to '結果画面へ', games_result_path(:monster_id => @monster.id), class: "disable nes-btn is-success",id: "result"%>
 
     <div class="speech-result-box disable">
-      <p class="result">[ここに正解かどうか表示されます]</p>
+      <p class="result">食材を順番に並び替えろ!!</p>
       <% @monster.recipes.shuffle.each_with_index do |recipe,i| %>
         <button class='button float-right nes-btn' id='<%=i%>' onclick="battle()"><%= recipe.name %></button>
       <%end%>
