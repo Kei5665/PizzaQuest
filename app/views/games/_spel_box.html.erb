@@ -96,7 +96,7 @@ function gameStart() {
 }
 
 function hint() {
-  resultPara.textContent = phrases[count].slice( 0, 1 )
+  resultPara.textContent = phrases[count].slice( 0, 2 ) + ' ' + answer_grams[count].slice( 0, 1 )
   resultPara.style.background = 'rgba(0,0,0,0.2)';
 }
 
