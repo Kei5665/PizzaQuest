@@ -12,3 +12,9 @@
   padding: 0;
   margin: 0;
 }
+.nes-table th::after, .nes-table th::before, .nes-table td::after, .nes-table td::before {
+  background: none;
+}
+.nes-table th, .nes-table td {
+  border: none;
+}
