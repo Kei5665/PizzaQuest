@@ -1,15 +1,26 @@
 <div class="nes-table-responsive">
-  <table class="nes-table is-bordered">
+  <table class="nes-table is-bordered mx-auto">
     <thead>
       <tr>
-        <th class="d-flex justify-content-between p-3">
+        <th>
+          <p class="m-0">ユーザー</p>
+        </th>
+        <th>
           <p class="m-0"><%= @monster.name%></p>
         </th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td class="d-flex justify-content-between">
+        <td>
+          <div>
+            <p class="m-0">HP:</p>
+          </div>
+          <div class="container">
+            <progress class="nes-progress is-success" id="life_user" value="100" max="100"></progress>
+          </div>
+        </td>
+        <td>
           <div>
             <p class="m-0">HP:</p>
           </div>
