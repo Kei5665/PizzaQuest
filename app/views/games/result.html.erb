@@ -2,6 +2,10 @@
   <h1 class="mt-5">クリアおめでとう！</h1>
   <p><%= @monster.name%>を倒した！</p>
   <i class="nes-mario my-4 mx-auto"></i>
+  <div class="monster-detail nes-container with-title is-centered my-5">
+    <p class="title">ポイント!!</p>
+    <p><%=@monster.detail%></p>
+  </div>
   <p><%= @gold%>Gを獲得した!!</p>
   <p>あなたの現在のレベル:<%=@level_current.level_name%></p>
   <p><%=@level_next.level_name%>まであと<%=@require_point%>G</p>

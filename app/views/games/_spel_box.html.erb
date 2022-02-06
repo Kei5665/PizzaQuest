@@ -1,13 +1,6 @@
-<div class="lists disable nes-container with-title is-centered mt-1">
-  <p class="title">選択済みのレシピ</p>
-  <div class="selected-recipes">
-  <% @monster.recipes.order(:order_num).each do |recipe| %>
-    <button class='button float-right nes-btn disable'><%= recipe.name %></button>
-  <%end%>
-  </div>
-</div>
+<p class="result text-center disable">食材を順番に並び替えろ!!</p>
 
-<div class="gram-over nes-container with-title is-centered is-rounded my-3 text-center disable">
+<div class="gram-over nes-container with-title is-centered is-rounded my-3 p-1 text-center disable">
   <p class="title">グラム選択</p>
   <div class="gram">
   <% @monster.gram_arr.each_with_index do |gram,i| %>
@@ -20,23 +13,30 @@
   </div>
 </div>
 
-<div class="nes-container is-rounded mt-3 text-center">
+<div class="spel-box nes-container is-rounded mt-3 p-1 pt-2 text-center">
   <h2 class="encourage_to_speech">レシピを唱えろ!!</h2>
   <button class="start nes-btn is-primary">呪文を唱える</button>
-  <button class="hint disable nes-btn is-success">ヒント</button>
+
+  <div class="lists disable mb-3">
+    <p class="title d-inline">ひとつ前</p>
+    <div class="selected-recipes d-inline">
+    <% @monster.recipes.order(:order_num).each do |recipe| %>
+      <button class='button float-right nes-btn disable mb-1'><%= recipe.name %></button>
+    <%end%>
+    </div>
+  </div>
+
   <button class="finish disable nes-btn">終了</button>
   <button class="restart disable nes-btn is-error">やり直す</button>
   <%= link_to '結果画面へ', games_result_path(:monster_id => @monster.id), class: "disable nes-btn is-success",id: "result"%>
 
     <div class="speech-result-box disable">
-      <p class="result">[ここに正解かどうか表示されます]</p>
       <% @monster.recipes.shuffle.each_with_index do |recipe,i| %>
-        <button class='button float-right nes-btn' id='<%=i%>' onclick="battle()"><%= recipe.name %></button>
+        <button class='button float-right nes-btn mb-3' id='<%=i%>' onclick="battle()"><%= recipe.name %></button>
       <%end%>
+      <button class="hint disable nes-btn is-success mb-3">ヒント</button>
     </div>
 </div>
-<button class="nes-btn mt-3" id="BGM">BGM</button>
-
 
 <script>
   // monsterコントローラーからのパラメータ
@@ -45,6 +45,9 @@
 
   // 「レシピを唱えろ!!」部分
   var encourageSpeech = document.querySelector('.encourage_to_speech');
+
+  // ひとまとめ
+  var spelBox = document.querySelector('.spel-box');
 
   // 音声認識の結果を表示する要素
   var resultPara = document.querySelector('.result');
@@ -87,13 +90,13 @@ function gameStart() {
     hintBtn.classList.remove("disable");
     encourageSpeech.classList.add("disable");
     startBtn.classList.add("disable");
-    recipeList.classList.remove("disable");
-    gramOver.classList.remove("disable");
+    resultPara.classList.remove("disable");
+
     select.play();
 }
 
 function hint() {
-  resultPara.textContent = phrases[count].slice( 0, 1 )
+  resultPara.textContent = phrases[count].slice( 0, 2 ) + ' ' + answer_grams[count].slice( 0, 1 )
   resultPara.style.background = 'rgba(0,0,0,0.2)';
 }
 
@@ -104,15 +107,20 @@ function restart() {
   function battle() {
     var target = event.target;
     var phrase = phrases[count];
+    
+    selected = target
 
     // レシピと入力された音声が同じかどうか判定
     if(target.innerHTML === phrase) {
       gramList.children[count].classList.remove("disable");
+      spelBox.classList.add("disable");
+      gramOver.classList.remove("disable");
+
     } else {
         resultPara.textContent = '呪文が正しくありません';
         setTimeout(() => {
           resultPara.textContent = '';
-        }, 2000);
+        }, 5000);
         resultPara.style.background = 'red';
         startBtn.textContent = 'やり直す';
         uncorrect.play();
@@ -127,12 +135,22 @@ function restart() {
 
     if(target.innerHTML === answer) {
       // 正解の場合
+      selected.remove();
+      gramOver.classList.add("disable");
+      spelBox.classList.remove("disable");
       gramList.children[count].classList.add("disable")
+      recipeList.classList.remove("disable");
+
+      // １つ前のレシピを非表示にする。
+      if(count > 0) {
+        selectedRecipes.children[count - 1].classList.add("disable");
+      }
+
       selectedRecipes.children[count].classList.remove("disable");
       resultPara.textContent = '呪文を唱えた!!モンスターはダメージを受けた!!';
       setTimeout(() => {
         resultPara.textContent = '';
-      }, 2000);
+      }, 5000);
       resultPara.style.background = 'lime';
       alterLife_monster(user_attack_point);
       spel.play();
@@ -154,10 +172,12 @@ function restart() {
         }
     } else {
         // 不正解の場合
+        gramOver.classList.add("disable");
+        spelBox.classList.remove("disable");
         resultPara.textContent = '呪文が正しくありません';
         setTimeout(() => {
           resultPara.textContent = '';
-        }, 2000);
+        }, 5000);
         resultPara.style.background = 'red';
         startBtn.textContent = 'やり直す';
         uncorrect.play();

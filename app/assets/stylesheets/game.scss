@@ -1,4 +1,20 @@
 .disable {
     display: none;
   }
-  
+.nes-progress {
+  height: 1rem;
+  width: 6rem;
+}
+.nes-container.is-rounded {
+  padding: 0;
+}
+.spel-box .nes-btn,.gram-over .nes-btn {
+  padding: 0;
+  margin: 0;
+}
+.nes-table th::after, .nes-table th::before, .nes-table td::after, .nes-table td::before {
+  background: none;
+}
+.nes-table th, .nes-table td {
+  border: none;
+}
