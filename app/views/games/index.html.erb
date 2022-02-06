@@ -1,11 +1,13 @@
 <%= render 'audio' %>
 
 <div class="container">
-  <%= render 'monster_info' %>
-  <div class="monster-img-box text-center">
-    <i class="nes-mario my-4 mx-auto"></i>
+  <div class="d-flex justify-content-between">
+    <%= render 'user_info' %>
+    <%= render 'monster_info' %>
   </div>
-  <%= render 'user_info' %>
+  <div class="monster-img-box text-center">
+    <i class="nes-mario"></i>
+  </div>
   <%= render 'spel_box' %>
 </div>
 
