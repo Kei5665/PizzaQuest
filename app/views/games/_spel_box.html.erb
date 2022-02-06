@@ -16,8 +16,8 @@
   <button class="start nes-btn is-primary">呪文を唱える</button>
 
   <div class="lists text-start disable">
-    <p class="title">ひとつ前のレシピ</p>
-    <div class="selected-recipes">
+    <p class="title d-inline">ひとつ前のレシピ</p>
+    <div class="selected-recipes d-inline">
     <% @monster.recipes.order(:order_num).each do |recipe| %>
       <button class='button float-right nes-btn disable'><%= recipe.name %></button>
     <%end%>
