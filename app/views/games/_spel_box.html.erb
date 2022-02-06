@@ -24,7 +24,6 @@
     </div>
   </div>
 
-  <button class="hint disable nes-btn is-success">ヒント</button>
   <button class="finish disable nes-btn">終了</button>
   <button class="restart disable nes-btn is-error">やり直す</button>
   <%= link_to '結果画面へ', games_result_path(:monster_id => @monster.id), class: "disable nes-btn is-success",id: "result"%>
@@ -34,6 +33,7 @@
       <% @monster.recipes.shuffle.each_with_index do |recipe,i| %>
         <button class='button float-right nes-btn' id='<%=i%>' onclick="battle()"><%= recipe.name %></button>
       <%end%>
+      <button class="hint disable nes-btn is-success">ヒント</button>
     </div>
 </div>
 <button class="nes-btn mt-3" id="BGM">BGM</button>
