@@ -16,6 +16,20 @@ class Admin::MonstersController < ApplicationController
     end
   end
 
+  
+  def edit
+    @monster = Monster.find(params[:id])
+  end
+  
+  def update
+    @monster = Monster.find(params[:id])
+    if @monster.update!(monster_params)
+      redirect_to admin_monsters_path
+    else
+      render :new
+    end
+  end
+  
   def destroy
     monster = Monster.find(params[:id])
     monster.destroy!
