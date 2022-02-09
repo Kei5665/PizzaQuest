@@ -25,7 +25,7 @@ class Monster < ApplicationRecord
   def gram_arr
     recipe_gram_arr = []
 
-    recipes.each do |monster_recipe|
+    recipes.order(:order_num).each do |monster_recipe|
       recipe = Recipe.find(monster_recipe.id)
       gram_arr = []
 
