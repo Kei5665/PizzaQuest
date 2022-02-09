@@ -1,7 +1,6 @@
 <p class="result text-center disable">作る順に食材を選べ!!</p>
 
-<div class="gram-over nes-container with-title is-centered is-rounded my-3 p-1 text-center disable">
-  <p class="title">グラム選択</p>
+<div class="gram-over nes-container is-rounded my-3 p-1 text-center disable">
   <div class="gram">
   <% @monster.gram_arr.each_with_index do |gram,i| %>
     <div class="disable" id="gram-<%=i%>">
@@ -113,6 +112,7 @@ function restart() {
 
     // レシピと入力された音声が同じかどうか判定
     if(target.innerHTML === phrase) {
+      resultPara.textContent =  phrases[count] + 'のグラム選択';
       gramList.children[count].classList.remove("disable");
       spelBox.classList.add("disable");
       gramOver.classList.remove("disable");
