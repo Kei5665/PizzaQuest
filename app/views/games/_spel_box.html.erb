@@ -178,7 +178,7 @@ function restart() {
         // 不正解の場合
         gramOver.classList.add("disable");
         spelBox.classList.remove("disable");
-        resultPara.textContent = '呪文が正しくありません';
+        resultPara.textContent = 'ダメージを受けた!!';
         setTimeout(() => {
           resultPara.textContent = '作る順に食材を選べ!!';
           resultPara.style.background = 'none';
