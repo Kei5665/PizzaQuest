@@ -168,6 +168,7 @@ function restart() {
           resultPara.textContent = 'モンスターにダメージを与えた!!';
           lifeBar_monster.value = 0;
           battle_music.pause()
+          recipeList.classList.add("disable");
           startBtn.classList.add("disable");
           hintBtn.classList.add("disable");
           finishBtn.classList.remove("disable");
@@ -198,6 +199,8 @@ function restart() {
       life = 0
       // ゲームオーバの表示
       hintBtn.classList.add("disable");
+      resultBox.classList.add("disable");
+      recipeList.classList.add("disable");
       resultPara.textContent = '体力が0になった';
       resultPara.style.background = 'red';
       startBtn.classList.add("disable");
