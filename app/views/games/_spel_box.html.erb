@@ -118,11 +118,11 @@ function restart() {
       gramOver.classList.remove("disable");
 
     } else {
-        resultPara.textContent = '呪文が正しくありません';
+        resultPara.textContent = 'ダメージを受けた!!';
         setTimeout(() => {
           resultPara.textContent = '作る順に食材を選べ!!';
           resultPara.style.background = 'none';
-        }, 5000);
+        }, 3000);
         resultPara.style.background = 'red';
         startBtn.textContent = 'やり直す';
         uncorrect.play();
@@ -149,11 +149,11 @@ function restart() {
       }
 
       selectedRecipes.children[count].classList.remove("disable");
-      resultPara.textContent = '呪文を唱えた!!モンスターはダメージを受けた!!';
+      resultPara.textContent = 'モンスターにダメージを与えた!!';
       setTimeout(() => {
         resultPara.textContent = '作る順に食材を選べ!!';
         resultPara.style.background = 'none';
-      }, 5000);
+      }, 3000);
       resultPara.style.background = 'lime';
       alterLife_monster(user_attack_point);
       spel.play();
@@ -165,7 +165,7 @@ function restart() {
           startBtn.textContent = '次のターンへ';
         } else {
           // 残りのレシピがない場合はfinishBtnを出力
-          resultPara.textContent = '呪文を唱えた!!モンスターはダメージを受けた!!';
+          resultPara.textContent = 'モンスターにダメージを与えた!!';
           lifeBar_monster.value = 0;
           battle_music.pause()
           startBtn.classList.add("disable");
@@ -181,7 +181,7 @@ function restart() {
         setTimeout(() => {
           resultPara.textContent = '作る順に食材を選べ!!';
           resultPara.style.background = 'none';
-        }, 5000);
+        }, 3000);
         resultPara.style.background = 'red';
         startBtn.textContent = 'やり直す';
         uncorrect.play();
