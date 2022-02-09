@@ -119,7 +119,8 @@ function restart() {
     } else {
         resultPara.textContent = '呪文が正しくありません';
         setTimeout(() => {
-          resultPara.textContent = '';
+          resultPara.textContent = '　';
+          resultPara.style.background = 'none';
         }, 5000);
         resultPara.style.background = 'red';
         startBtn.textContent = 'やり直す';
@@ -149,7 +150,8 @@ function restart() {
       selectedRecipes.children[count].classList.remove("disable");
       resultPara.textContent = '呪文を唱えた!!モンスターはダメージを受けた!!';
       setTimeout(() => {
-        resultPara.textContent = '';
+        resultPara.textContent = '　';
+        resultPara.style.background = 'none';
       }, 5000);
       resultPara.style.background = 'lime';
       alterLife_monster(user_attack_point);
@@ -176,7 +178,8 @@ function restart() {
         spelBox.classList.remove("disable");
         resultPara.textContent = '呪文が正しくありません';
         setTimeout(() => {
-          resultPara.textContent = '';
+          resultPara.textContent = '　';
+          resultPara.style.background = 'none';
         }, 5000);
         resultPara.style.background = 'red';
         startBtn.textContent = 'やり直す';
