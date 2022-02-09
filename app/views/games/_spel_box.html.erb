@@ -1,7 +1,6 @@
-<p class="result text-center disable">食材を順番に並び替えろ!!</p>
+<p class="result text-center disable">作る順に食材を選べ!!</p>
 
-<div class="gram-over nes-container with-title is-centered is-rounded my-3 p-1 text-center disable">
-  <p class="title">グラム選択</p>
+<div class="gram-over nes-container is-rounded my-3 p-1 text-center disable">
   <div class="gram">
   <% @monster.gram_arr.each_with_index do |gram,i| %>
     <div class="disable" id="gram-<%=i%>">
@@ -14,17 +13,8 @@
 </div>
 
 <div class="spel-box nes-container is-rounded mt-3 p-1 pt-2 text-center">
-  <h2 class="encourage_to_speech">レシピを唱えろ!!</h2>
-  <button class="start nes-btn is-primary">呪文を唱える</button>
-
-  <div class="lists disable mb-3">
-    <p class="title d-inline">ひとつ前</p>
-    <div class="selected-recipes d-inline">
-    <% @monster.recipes.order(:order_num).each do |recipe| %>
-      <button class='button float-right nes-btn disable mb-1'><%= recipe.name %></button>
-    <%end%>
-    </div>
-  </div>
+  <h2 class="encourage_to_speech"><%= @monster.name %>が現れた!!</h2>
+  <button class="start nes-btn is-primary">たたかう</button>
 
   <button class="finish disable nes-btn">終了</button>
   <button class="restart disable nes-btn is-error">やり直す</button>
@@ -36,6 +26,16 @@
       <%end%>
       <button class="hint disable nes-btn is-success mb-3">ヒント</button>
     </div>
+
+  <div class="lists disable mt-3">
+    <p class="title d-inline">ひとつ前</p>
+    <div class="selected-recipes d-inline">
+    <% @monster.recipes.order(:order_num).each do |recipe| %>
+      <button class='button float-right nes-btn disable mb-1'><%= recipe.name %></button>
+    <%end%>
+    </div>
+  </div>
+
 </div>
 
 <script>
@@ -112,15 +112,17 @@ function restart() {
 
     // レシピと入力された音声が同じかどうか判定
     if(target.innerHTML === phrase) {
+      resultPara.textContent =  phrases[count] + 'のグラム選択';
       gramList.children[count].classList.remove("disable");
       spelBox.classList.add("disable");
       gramOver.classList.remove("disable");
 
     } else {
-        resultPara.textContent = '呪文が正しくありません';
+        resultPara.textContent = 'ダメージを受けた!!';
         setTimeout(() => {
-          resultPara.textContent = '';
-        }, 5000);
+          resultPara.textContent = '作る順に食材を選べ!!';
+          resultPara.style.background = 'none';
+        }, 3000);
         resultPara.style.background = 'red';
         startBtn.textContent = 'やり直す';
         uncorrect.play();
@@ -147,10 +149,11 @@ function restart() {
       }
 
       selectedRecipes.children[count].classList.remove("disable");
-      resultPara.textContent = '呪文を唱えた!!モンスターはダメージを受けた!!';
+      resultPara.textContent = 'モンスターにダメージを与えた!!';
       setTimeout(() => {
-        resultPara.textContent = '';
-      }, 5000);
+        resultPara.textContent = '作る順に食材を選べ!!';
+        resultPara.style.background = 'none';
+      }, 3000);
       resultPara.style.background = 'lime';
       alterLife_monster(user_attack_point);
       spel.play();
@@ -162,9 +165,10 @@ function restart() {
           startBtn.textContent = '次のターンへ';
         } else {
           // 残りのレシピがない場合はfinishBtnを出力
-          resultPara.textContent = '呪文を唱えた!!モンスターはダメージを受けた!!';
+          resultPara.textContent = 'モンスターにダメージを与えた!!';
           lifeBar_monster.value = 0;
           battle_music.pause()
+          recipeList.classList.add("disable");
           startBtn.classList.add("disable");
           hintBtn.classList.add("disable");
           finishBtn.classList.remove("disable");
@@ -174,10 +178,11 @@ function restart() {
         // 不正解の場合
         gramOver.classList.add("disable");
         spelBox.classList.remove("disable");
-        resultPara.textContent = '呪文が正しくありません';
+        resultPara.textContent = 'ダメージを受けた!!';
         setTimeout(() => {
-          resultPara.textContent = '';
-        }, 5000);
+          resultPara.textContent = '作る順に食材を選べ!!';
+          resultPara.style.background = 'none';
+        }, 3000);
         resultPara.style.background = 'red';
         startBtn.textContent = 'やり直す';
         uncorrect.play();
@@ -194,6 +199,8 @@ function restart() {
       life = 0
       // ゲームオーバの表示
       hintBtn.classList.add("disable");
+      resultBox.classList.add("disable");
+      recipeList.classList.add("disable");
       resultPara.textContent = '体力が0になった';
       resultPara.style.background = 'red';
       startBtn.classList.add("disable");
