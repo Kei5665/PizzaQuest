@@ -17,15 +17,6 @@
   <h2 class="encourage_to_speech"><%= @monster.name %>が現れた!!</h2>
   <button class="start nes-btn is-primary">たたかう</button>
 
-  <div class="lists disable mb-3">
-    <p class="title d-inline">ひとつ前</p>
-    <div class="selected-recipes d-inline">
-    <% @monster.recipes.order(:order_num).each do |recipe| %>
-      <button class='button float-right nes-btn disable mb-1'><%= recipe.name %></button>
-    <%end%>
-    </div>
-  </div>
-
   <button class="finish disable nes-btn">終了</button>
   <button class="restart disable nes-btn is-error">やり直す</button>
   <%= link_to '結果画面へ', games_result_path(:monster_id => @monster.id), class: "disable nes-btn is-success",id: "result"%>
@@ -36,6 +27,16 @@
       <%end%>
       <button class="hint disable nes-btn is-success mb-3">ヒント</button>
     </div>
+
+  <div class="lists disable mt-3">
+    <p class="title d-inline">ひとつ前</p>
+    <div class="selected-recipes d-inline">
+    <% @monster.recipes.order(:order_num).each do |recipe| %>
+      <button class='button float-right nes-btn disable mb-1'><%= recipe.name %></button>
+    <%end%>
+    </div>
+  </div>
+
 </div>
 
 <script>
