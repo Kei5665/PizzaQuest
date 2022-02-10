@@ -2,11 +2,9 @@
 
 <div class="gram-over nes-container is-rounded my-3 p-1 text-center disable">
   <div class="gram">
-  <% @monster.gram_arr.each_with_index do |gram,i| %>
+  <% @monster.answer_grams.each_with_index do |gram,i| %>
     <div class="disable" id="gram-<%=i%>">
-      <% gram.each do |g| %>
-      <button class="button float-right nes-btn" onclick="judge()"><%= g %></button>
-      <%end%>
+      <button class="button float-right nes-btn" onclick="judge()"><%= gram %></button>
     </div>
   <%end%>
   </div>
