@@ -21,18 +21,33 @@
   <div class="carousel-inner">
     <div class="carousel-item active">
       <%= image_tag 'img05.jpg', class: 'd-block w-100' %>
+      <div class="carousel-caption">
+        <p>作る順番に食材を選びます</p>
+      </div>
     </div>
     <div class="carousel-item">
       <%= image_tag 'img04.jpg', class: 'd-block w-100' %>
+      <div class="carousel-caption">
+        <p>グラム数もついでに選択します</p>
+      </div>
     </div>
     <div class="carousel-item">
       <%= image_tag 'img02.jpg', class: 'd-block w-100' %>
+      <div class="carousel-caption">
+        <p>正解するとモンスターのライフゲージが減ります</p>
+      </div>
     </div>
     <div class="carousel-item">
       <%= image_tag 'img03.jpg', class: 'd-block w-100' %>
+      <div class="carousel-caption">
+        <p>間違えると自分のライフゲージが減ります</p>
+      </div>
     </div>
     <div class="carousel-item">
       <%= image_tag 'img01.jpg', class: 'd-block w-100' %>
+      <div class="carousel-caption">
+        <p>ライフゲージがなくなる前にモンスターを倒したらクリアです!!</p>
+      </div>
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -47,16 +62,6 @@
 
 <div class="w-75 mx-auto">
   <div class="lists">
-    <ul class="nes-list is-circle">
-    <li><p>作る順番に食材を選びます</p></li>
-    <li><p>グラム数もついでに選択します</p></li>
-    <li><p>正解するとモンスターのライフゲージが減ります</p></li>
-    <li><p>間違えると自分のライフゲージが減ります</p></li>
-    <li><p>ライフゲージがなくなる前にモンスターを倒したらクリアです!!</p></li>
-    </ul>
-  </div>
-
-  <div class="lists">
     <h3 class="text-center"><i class="nes-icon coin"></i> 2つのモード</h3>
     <ul class="nes-list is-circle">
     <li><p>初心者用のノーマルモード。グラムの選択肢は一つです</p></li>
@@ -66,5 +71,4 @@
   <div class="text-center mb-5">
   <%= link_to 'はじめる',  monsters_path, class: "nes-btn is-success text-center" %>
   </div>
-
 </div>
