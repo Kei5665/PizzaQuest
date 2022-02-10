@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/games/result', to: 'games#result'
   get '/games', to: 'games#index'
   get '/trial', to: 'trials#index'
+  get '/trial/result', to: 'trials#result'
 
   namespace :admin do 
     resources :monsters
