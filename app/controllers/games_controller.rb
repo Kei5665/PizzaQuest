@@ -21,4 +21,7 @@ class GamesController < ApplicationController
     # @level_next = user.level.next
     # @require_point = @level_next.required_gold - @level_current.required_gold
   end
+
+  def trial
+  end
 end

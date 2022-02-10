@@ -5,6 +5,7 @@
   </div>
   <h1 class="monster-level text-center mt-4">level:<%=@monster.level%></h1>
   <div class="game-link btn-box d-flex justify-content-center">
-    <%= link_to 'start', games_path(:monster_id => @monster.id), class: "nes-btn is-primary"%>
+    <%= link_to 'normal', games_path(:monster_id => @monster.id), class: "nes-btn is-primary"%>
+    <%= link_to 'trial', trial_path(:monster_id => @monster.id), class: "nes-btn is-error"%>
   </div>
 </div>
