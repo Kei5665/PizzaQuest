@@ -2,9 +2,11 @@
 
 <div class="gram-over nes-container is-rounded my-3 p-1 text-center disable">
   <div class="gram">
-  <% @monster.answer_grams.each_with_index do |gram,i| %>
+  <% @monster.gram_arr.each_with_index do |gram,i| %>
     <div class="disable" id="gram-<%=i%>">
-      <button class="button float-right nes-btn" onclick="judge()"><%= gram %></button>
+      <% gram.each do |g| %>
+      <button class="button float-right nes-btn" onclick="judge()"><%= g %></button>
+      <%end%>
     </div>
   <%end%>
   </div>
@@ -16,7 +18,7 @@
 
   <button class="finish disable nes-btn">終了</button>
   <button class="restart disable nes-btn is-error">やり直す</button>
-  <%= link_to '結果画面へ', games_result_path(:monster_id => @monster.id), class: "disable nes-btn is-success",id: "result"%>
+  <%= link_to '結果画面へ', trial_result_path(:monster_id => @monster.id), class: "disable nes-btn is-success",id: "result"%>
 
     <div class="speech-result-box disable">
       <% @monster.recipes.shuffle.each_with_index do |recipe,i| %>

@@ -1,4 +1,4 @@
-class GamesController < ApplicationController
+class TrialsController < ApplicationController
   def index
     @monster = Monster.find_by(id: params[:monster_id])
 
@@ -15,11 +15,5 @@ class GamesController < ApplicationController
     @level_current = Level.first
     @level_next = Level.second
     @require_point = @level_next.required_gold - @level_current.required_gold
-
-    # Userモデルを作ったら以下に書き換える↓
-    # @level_current = user.level
-    # @level_next = user.level.next
-    # @require_point = @level_next.required_gold - @level_current.required_gold
   end
-
 end
