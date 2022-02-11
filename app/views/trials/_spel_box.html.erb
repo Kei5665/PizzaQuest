@@ -1,3 +1,5 @@
+<p id="timer" class="text-center"></p>
+
 <p class="result text-center disable">作る順に食材を選べ!!</p>
 
 <div class="gram-over nes-container is-rounded my-3 p-1 text-center disable">
@@ -37,6 +39,58 @@
   </div>
 
 </div>
+
+<script>
+ const p = document.getElementById("timer");
+
+    // 残り時間通知受け取り関数
+ const tickFunc = ( time  )=>{
+     p.textContent = `残り${ time[3] }秒`;
+ };
+    // 終了通知受け取り関数
+ const endFunc = ()=>{
+     p.textContent = "残り0秒";
+     resultBox.classList.add("disable");
+ };
+</script>
+
+<script>
+const coutdownTimer =  ( tickCallBack , endCallBack
+    ,daysOrSeconds , hours = null , minutes  = null , seconds = null ) => {
+ 
+        // 秒を日数・時間・分・秒に変換
+    const calcTime = sec =>{
+        const days = Math.floor(sec / 86400);
+        const hours = Math.floor( (sec-=days*86400) / 3600);
+        const minutes = Math.floor( (sec-=hours*3600) / 60);
+        sec-=minutes*60;
+        return [days,hours,minutes,sec];
+    };
+ 
+        // 引数を秒数に変換
+    let sec = (hours===null) ? daysOrSeconds
+        : seconds + minutes * 60 + hours * 3600 + daysOrSeconds * 86400;
+ 
+        // スタートのタイムスタンプ取得
+    const startTime = Date.now();
+        // 初回の残り時間通知
+    tickCallBack( calcTime(sec) );
+ 
+        // タイマースタート（1秒間隔)
+    timer = setInterval(
+        ()=>{
+                // 残り時間を秒で計算
+            let nowSec= sec - Math.floor( (Date.now() - startTime) / 1000 );
+            if( nowSec <= 0 ) { // 残り時間なし
+                gameOver();
+                endFunc();
+            }else{
+                tickCallBack( calcTime(nowSec) ); // 残り時間通知
+            }
+        },1000
+    )
+};
+</script>
 
 <script>
   // monsterコントローラーからのパラメータ
@@ -85,6 +139,7 @@
   restartBtn.addEventListener('click', restart);   
 
 function gameStart() {
+    coutdownTimer( tickFunc , endFunc , 59 );
       //「レシピを唱えろ!!」部分を消して音声認識boxを表示
     resultBox.classList.remove("disable");
     hintBtn.classList.remove("disable");
