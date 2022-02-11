@@ -1,0 +1,74 @@
+<div class="container text-center mt-5">
+  <h1>PizzaMonsters</h1>
+  <h1 class="text-center">ピザモンスターズ</h1>
+  <p><i class="nes-icon star is-small"></i> 遊びながらフォーミュラーを覚えよう <i class="nes-icon star is-small"></i></p>
+  <div class="monster-img-box my-1">
+    <i class="nes-mario is-large"></i>
+  </div>
+  <%= link_to 'はじめる',  monsters_path, class: "nes-btn is-success" %>
+</div>
+
+ <h1 class="text-center my-5">遊び方</h1>
+
+ <div id="carouselExampleIndicators" class="carousel carousel-dark slide w-75 mx-auto" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <%= image_tag 'img05.jpg', class: 'd-block w-100' %>
+      <div class="carousel-caption">
+        <p>作る順番に食材を選びます</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <%= image_tag 'img04.jpg', class: 'd-block w-100' %>
+      <div class="carousel-caption">
+        <p>グラム数もついでに選択します</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <%= image_tag 'img02.jpg', class: 'd-block w-100' %>
+      <div class="carousel-caption">
+        <p>正解するとモンスターのライフゲージが減ります</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <%= image_tag 'img03.jpg', class: 'd-block w-100' %>
+      <div class="carousel-caption">
+        <p>間違えると自分のライフゲージが減ります</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <%= image_tag 'img01.jpg', class: 'd-block w-100' %>
+      <div class="carousel-caption">
+        <p>ライフゲージがなくなる前にモンスターを倒したらクリアです!!</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<div class="w-75 mx-auto">
+  <div class="lists">
+    <h3 class="text-center"><i class="nes-icon coin"></i> 2つのモード</h3>
+    <ul class="nes-list is-circle">
+    <li><p>初心者用のノーマルモード。グラムの選択肢は一つです</p></li>
+    <li><p>上級者用のトライアルモード。グラムの選択肢が増えて時間を計測します</p></li>
+    </ul>
+  </div>
+  <div class="text-center mb-5">
+  <%= link_to 'はじめる',  monsters_path, class: "nes-btn is-success text-center" %>
+  </div>
+</div>
